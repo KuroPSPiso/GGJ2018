@@ -38,11 +38,7 @@ public class PlayerManager : MonoBehaviour
             if (SkinGameObjects.Length >= i + 1)
             {
                 GameObject newPlayer = GameObject.Instantiate(PlayerGameObject);
-                GameObject newSkin = GameObject.Instantiate(SkinGameObjects[i], newPlayer.transform);
-
-                LookDirection lookDirectionOfSkin = newSkin.GetComponent<LookDirection>();
-                PlayerMovement playerInput = newPlayer.GetComponent<PlayerMovement>();
-                playerInput.lookDirection = lookDirectionOfSkin;
+                GameObject newSkin = GameObject.Instantiate(SkinGameObjects[i], newPlayer.transform.GetChild(0));
 
                 PlayerInput pInput = newPlayer.GetComponent<PlayerInput>();
                 pInput.controllerId = i;
@@ -50,7 +46,7 @@ public class PlayerManager : MonoBehaviour
                 pInput.ropeManager = ropeManager;
                 _playerGameObjects.Add(newPlayer);
 
-                if(i < 2)
+                if (i < 2)
                 {
                     newPlayer.transform.position = PlayerSpawns[0].position + Vector3.right * ((i % 2) - 0.5f) * 2.5f;
                     pInput.team = 0;

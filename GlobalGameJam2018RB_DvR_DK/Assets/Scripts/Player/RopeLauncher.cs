@@ -75,7 +75,7 @@ public class RopeLauncher : MonoBehaviour
                     Hook hookCmp = hookObj.GetComponent<Hook>();
 
                     //Rotate gun
-                    gunObj.eulerAngles = new Vector3(0, 0, angle);
+                    //gunObj.eulerAngles = new Vector3(0, 0, angle);
 
                     //Select hook
                     if (hookCmp != selectedHook)
@@ -175,8 +175,8 @@ public class RopeLauncher : MonoBehaviour
 
         lineRenderer.SetPositions(new Vector3[]
         {
-            this.gameObject.transform.position + new Vector3(0, 0.5f, 0),
-            this.gameObject.transform.position + new Vector3(0, 0.5f, 0) + new Vector3(x, y, 0) * 1
+            gunObj.position,
+            gunObj.position + new Vector3(x, y, 0) * 1
         });
         lineRenderer.startColor = LaunchDirectionColor;
         Color c = LaunchDirectionColor;

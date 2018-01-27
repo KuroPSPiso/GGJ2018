@@ -1,55 +1,16 @@
 fileFormatVersion: 2
-guid: 8c59ee372b4e777448edb8fd0e2fb9b5
-timeCreated: 1517061900
+guid: 5d71cac0c8329364fac74ab89bbaa40a
+timeCreated: 1517091371
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Cap 2.1
-    100002: Cube
-    100004: Cylinder
-    100006: Cylinder.1
-    100008: Cylinder.2
-    100010: Cylinder.3
-    100012: Cylinder.4
-    100014: //RootNode
-    100016: Torus
-    400000: Cap 2.1
-    400002: Cube
-    400004: Cylinder
-    400006: Cylinder.1
-    400008: Cylinder.2
-    400010: Cylinder.3
-    400012: Cylinder.4
-    400014: //RootNode
-    400016: Torus
-    2100000: MatGunSilver
-    2100002: MatGunBlue
-    2100004: MatGunFireRed
-    2300000: Cap 2.1
-    2300002: Cube
-    2300004: Cylinder
-    2300006: Cylinder.1
-    2300008: Cylinder.2
-    2300010: Cylinder.3
-    2300012: Cylinder.4
-    2300014: Torus
-    3300000: Cap 2.1
-    3300002: Cube
-    3300004: Cylinder
-    3300006: Cylinder.1
-    3300008: Cylinder.2
-    3300010: Cylinder.3
-    3300012: Cylinder.4
-    3300014: Torus
-    4300000: Cylinder
-    4300002: Torus
-    4300004: Cylinder.4
-    4300006: Cylinder.3
-    4300008: Cylinder.2
-    4300010: Cylinder.1
-    4300012: Cube
-    4300014: Cap 2.1
+    100000: //RootNode
+    400000: //RootNode
+    2100000: lambert22
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: pCylinder30
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -81,7 +42,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.03
+    globalScale: 30
     meshCompression: 0
     addColliders: 0
     importVisibility: 1

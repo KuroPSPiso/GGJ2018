@@ -16401,7 +16401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.3
-  amplitude: 0.03
+  amplitude: 0.02
 --- !u!114 &114021843925340730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16483,7 +16483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.3
-  amplitude: 0.03
+  amplitude: 0.02
 --- !u!114 &114079313295056312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16548,7 +16548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.3
-  amplitude: 0.03
+  amplitude: 0.02
 --- !u!114 &114103567906692154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16639,7 +16639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.3
-  amplitude: 0.03
+  amplitude: 0.02
 --- !u!114 &114183064296991408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16743,7 +16743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.3
-  amplitude: 0.03
+  amplitude: 0.02
 --- !u!114 &114265173418371676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16938,7 +16938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.3
-  amplitude: 0.03
+  amplitude: 0.02
 --- !u!114 &114463818305419266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16951,7 +16951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.3
-  amplitude: 0.03
+  amplitude: 0.02
 --- !u!114 &114472903100360048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17224,7 +17224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.3
-  amplitude: 0.03
+  amplitude: 0.02
 --- !u!114 &114693416204478754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17237,7 +17237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.3
-  amplitude: 0.03
+  amplitude: 0.02
 --- !u!114 &114697555015378244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17380,7 +17380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.3
-  amplitude: 0.03
+  amplitude: 0.02
 --- !u!114 &114821399038269002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17497,7 +17497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.3
-  amplitude: 0.03
+  amplitude: 0.02
 --- !u!114 &114907043434605750
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17575,7 +17575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.3
-  amplitude: 0.03
+  amplitude: 0.02
 --- !u!114 &114954113375569364
 MonoBehaviour:
   m_ObjectHideFlags: 1
