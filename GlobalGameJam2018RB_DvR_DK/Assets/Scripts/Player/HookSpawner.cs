@@ -9,7 +9,6 @@ public class HookSpawner : MonoBehaviour
     public GameObject hook;
 
     //Private members
-    float lastFireTime = 0.0f;
     bool isFiring = false;
 
     PlayerInput pInput;
@@ -31,8 +30,13 @@ public class HookSpawner : MonoBehaviour
 
             if (hookObj)
             {
-                Destroy(hookObj);
-                nHooks++;
+                Hook hookScr = hookObj.GetComponent<Hook>();
+
+                if (!pInput.ropeManager.IsHookConnected(hookScr) && hookScr.isConnected == 0)
+                {
+                    Destroy(hookObj);
+                    nHooks++;
+                }
             }
             else
             {
@@ -41,8 +45,6 @@ public class HookSpawner : MonoBehaviour
                     Hook hookScr = Instantiate(hook, gunObj.transform.position, Quaternion.identity).GetComponent<Hook>();
                     hookScr.isStatic = false;
                     nHooks--;
-
-                    lastFireTime = Time.time;
                 }
             }
         }

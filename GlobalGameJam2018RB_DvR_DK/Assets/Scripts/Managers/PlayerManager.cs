@@ -52,11 +52,11 @@ public class PlayerManager : MonoBehaviour
 
                 if(i < 2)
                 {
-                    newPlayer.transform.position = PlayerSpawns[0].position;
+                    newPlayer.transform.position = PlayerSpawns[0].position + Vector3.right * ((i % 2) - 0.5f);
                 }
                 else
                 {
-                    newPlayer.transform.position = PlayerSpawns[1].position;
+                    newPlayer.transform.position = PlayerSpawns[1].position + Vector3.right * ((i % 2) - 0.5f);
                 }
 
                 if (i % 2 == 0)

@@ -26,6 +26,17 @@ public class RopeManager : MonoBehaviour
         return closest.Key;
     }
 
+    public bool IsHookConnected(Hook hook)
+    {
+        foreach (Rope rope in ropes)
+        {
+            if (rope.from == hook || rope.to == hook)
+                return true;
+        }
+
+        return false;
+    }
+
     //Find nearest point on a line
     static Vector3 NearestPointOnLine(Vector3 start, Vector3 end, Vector3 pnt)
     {

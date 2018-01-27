@@ -22,6 +22,9 @@ public class TerminalInteract : MonoBehaviour
 
     void Update()
     {
+        if (!pInput.IsActive())
+            return;
+
         if (!isLoading && pInput.IsActing())
             isLoading = true;
 
