@@ -8,7 +8,7 @@ public class PackageTransfer : MonoBehaviour
 
     //Private members
     bool isActing = false;
-    Rope prevSelected;
+    RopeColor prevSelected;
 
     PlayerInput pInput;
 
@@ -46,7 +46,7 @@ public class PackageTransfer : MonoBehaviour
             {
                 if (closestRope != null)
                 {
-                    Rope selected = closestRope.lineRenderer.GetComponent<Rope>();
+                    RopeColor selected = closestRope.lineRenderer.GetComponent<RopeColor>();
 
                     if (prevSelected != selected)
                     {

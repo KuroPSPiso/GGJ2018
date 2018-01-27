@@ -14,24 +14,17 @@ public class PlayerManager : MonoBehaviour
 
     private List<GameObject> _playerGameObjects = new List<GameObject>(4);
 
-    // Use this for initialization
     void Start()
     {
-        if (SkinGameObjects != null)
+        SpawnPlayers();
+
+        //Disable collision between players
+        for (int i = 0; i < _playerGameObjects.Count; i++)
         {
-            SpawnPlayers();
-
-            int count = 0;
-
-            for (int i = 0; i < (count = _playerGameObjects.Count); i++)
+            for (int j = 0; j < _playerGameObjects.Count; j++)
             {
-                for (int j = 0; j < count; j++)
-                {
-                    if (i != j)
-                    {
-                        Physics2D.IgnoreCollision(_playerGameObjects[i].GetComponent<BoxCollider2D>(), _playerGameObjects[j].GetComponent<BoxCollider2D>());
-                    }
-                }
+                if (i != j)
+                    Physics2D.IgnoreCollision(_playerGameObjects[i].GetComponent<BoxCollider2D>(), _playerGameObjects[j].GetComponent<BoxCollider2D>());
             }
         }
     }
@@ -44,9 +37,11 @@ public class PlayerManager : MonoBehaviour
             {
                 GameObject newPlayer = GameObject.Instantiate(PlayerGameObject);
                 GameObject newSkin = GameObject.Instantiate(SkinGameObjects[i], newPlayer.transform);
+
                 LookDirection lookDirectionOfSkin = newSkin.GetComponent<LookDirection>();
                 PlayerMovement playerInput = newPlayer.GetComponent<PlayerMovement>();
                 playerInput.lookDirection = lookDirectionOfSkin;
+
                 PlayerInput pInput = newPlayer.GetComponent<PlayerInput>();
                 pInput.controllerId = i;
                 pInput.controllersManager = ControllersManager;
