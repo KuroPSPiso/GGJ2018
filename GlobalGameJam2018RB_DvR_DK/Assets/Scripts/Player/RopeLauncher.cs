@@ -11,7 +11,7 @@ public class RopeLauncher : MonoBehaviour
     public int maxRopes = 2;
     public Transform gunObj;
     public GameObject rope;
-    public Color LaunchDirectionColor = Color.blue;
+    public Color LaunchDirectionColor = Color.red;
 
     //Private members
     AngleCollection hooksCache;
@@ -180,9 +180,11 @@ public class RopeLauncher : MonoBehaviour
             this.gameObject.transform.position + new Vector3(0, 0.5f, 0) + new Vector3(x, y, 0) * 1
         });
         lineRenderer.startColor = LaunchDirectionColor;
-        lineRenderer.endColor = LaunchDirectionColor;
+        Color c = LaunchDirectionColor;
+        c.a = 0;
+        lineRenderer.endColor = c;
         lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
-        lineRenderer.widthCurve = AnimationCurve.Linear(0, 0.10f, 1, 0f);
+        lineRenderer.widthCurve = AnimationCurve.Linear(0, 0.20f, 1, 0.10f);
         lineRenderer.enabled = true;
     }
 
