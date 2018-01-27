@@ -6,6 +6,7 @@ public class PlayerInput : MonoBehaviour
     public int controllerId;
 
     public RopeManager ropeManager;
+    public int team;
 
     public bool IsActive()
     {

@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1426865145666100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.05, z: 0}
+  m_LocalPosition: {x: 0.0571, y: 0.0339, z: 0.0033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4849108857641364}
@@ -98,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1773361027967070}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.21, y: 1.25, z: 0}
+  m_LocalPosition: {x: -11.29, y: 1.25, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4729078823517130}
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f574ae209c4fd44944a50ce2292c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 2
+  maxDistance: 1
 --- !u!114 &114407252218738056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4f35d8871bb504998c14c33da47934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 2
+  maxDistance: 1
   loadTime: 3
   beginCentre: {fileID: 0}
   packet: {fileID: 0}
@@ -263,3 +263,4 @@ MonoBehaviour:
   controllersManager: {fileID: 0}
   controllerId: 0
   ropeManager: {fileID: 0}
+  team: 0

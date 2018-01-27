@@ -52,27 +52,28 @@ public class PlayerManager : MonoBehaviour
 
                 if(i < 2)
                 {
-                    newPlayer.transform.position = PlayerSpawns[0].position + Vector3.right * ((i % 2) - 0.5f);
+                    newPlayer.transform.position = PlayerSpawns[0].position + Vector3.right * ((i % 2) - 0.5f) * 2.5f;
+                    pInput.team = 0;
                 }
                 else
                 {
-                    newPlayer.transform.position = PlayerSpawns[1].position + Vector3.right * ((i % 2) - 0.5f);
+                    newPlayer.transform.position = PlayerSpawns[1].position + Vector3.right * ((i % 2) - 0.5f) * 2.5f;
+                    pInput.team = 1;
                 }
 
                 if (i % 2 == 0)
                 {
                     newPlayer.GetComponent<RopeLauncher>().enabled = false;
-                    newPlayer.GetComponent<TerminalInteract>().enabled = false;
                 }
                 else
                 {
                     newPlayer.GetComponent<HookSpawner>().enabled = false;
                     newPlayer.GetComponent<PackageTransfer>().enabled = false;
-
-                    TerminalInteract tInteract = newPlayer.GetComponent<TerminalInteract>();
-                    tInteract.beginCentre = beginCentres[(i - 1) / 2];
-                    tInteract.packet = packages[(i - 1) / 2];
                 }
+
+                TerminalInteract tInteract = newPlayer.GetComponent<TerminalInteract>();
+                tInteract.beginCentre = beginCentres[(i - 1) / 2];
+                tInteract.packet = packages[(i - 1) / 2];
             }
         }
     }
