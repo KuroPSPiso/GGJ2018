@@ -6,3 +6,5 @@ GlobalGameJam2018RB_DvR_DK/.vs/GlobalGameJam2018RB_DvR_DK/v15/Server/sqlite3/sto
 GlobalGameJam2018RB_DvR_DK/.vs/GlobalGameJam2018RB_DvR_DK/v15/Server/sqlite3/storage.ide-shm
 GlobalGameJam2018RB_DvR_DK/.vs/GlobalGameJam2018RB_DvR_DK/v15/Server/sqlite3/storage.ide-wal
 *.csproj
+*.suo
+GlobalGameJam2018RB_DvR_DK/ProjectSettings/*
