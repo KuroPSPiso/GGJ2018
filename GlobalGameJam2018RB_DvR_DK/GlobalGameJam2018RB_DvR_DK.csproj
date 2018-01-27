@@ -327,6 +327,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\RopeLauncher.cs" />
     <Compile Include="Assets\Scripts\Player\TerminalInteract.cs" />
+    <Compile Include="Assets\Scripts\RandomAnimate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\XInputDotNet\Docs.txt" />

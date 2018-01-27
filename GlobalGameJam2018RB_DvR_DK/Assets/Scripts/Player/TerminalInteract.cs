@@ -12,6 +12,7 @@ public class TerminalInteract : MonoBehaviour
     //Private members
     float loadStatus = 0.0f;
     bool isLoading = false;
+    Terminal lastTerminal;
 
     PlayerInput pInput;
 
@@ -34,19 +35,49 @@ public class TerminalInteract : MonoBehaviour
             {
                 isLoading = false;
                 loadStatus = 0.0f;
+
+                if (lastTerminal)
+                {
+                    lastTerminal.StopLoading(pInput.team);
+                    lastTerminal = null;
+                }
             }
             else
             {
-                loadStatus += Time.deltaTime;
+                GameObject terminal = GetClosestTerminal(maxDistance);
 
-                if (loadStatus >= loadTime)
+                if (terminal)
                 {
-                    isLoading = false;
-                    loadStatus = 0.0f;
+                    Terminal t = terminal.GetComponent<Terminal>();
 
-                    //Spawn packet
-                    Package package = Instantiate(packet, beginCentre.position, Quaternion.identity).GetComponent<Package>();
-                    package.hookedTo = beginCentre.GetComponentInChildren<Hook>().transform;
+                    if (lastTerminal != t)
+                    {
+                        if(lastTerminal)
+                            lastTerminal.StopLoading(pInput.team);
+
+                        lastTerminal = t;
+                        lastTerminal.StartLoading(pInput.team);
+                    }
+
+                    loadStatus += Time.deltaTime;
+
+                    if (loadStatus >= loadTime)
+                    {
+                        isLoading = false;
+                        loadStatus = 0.0f;
+
+                        lastTerminal.FinishLoading(pInput.team);
+                        lastTerminal = null;
+
+                        //Spawn packet
+                        Package package = Instantiate(packet, beginCentre.position, Quaternion.identity).GetComponent<Package>();
+                        package.hookedTo = beginCentre.GetComponentInChildren<Hook>().transform;
+                    }
+                }
+                else if (lastTerminal)
+                {
+                    lastTerminal.StopLoading(pInput.team);
+                    lastTerminal = null;
                 }
             }
         }

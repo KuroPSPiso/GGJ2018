@@ -16,6 +16,7 @@ public class RopeLauncher : MonoBehaviour
     //Private members
     AngleCollection hooksCache;
     float lastCacheTime;
+    float shootTime;
 
     bool isFiring = false;
     LineRenderer ropeShot;
@@ -40,7 +41,6 @@ public class RopeLauncher : MonoBehaviour
 
         //Get aiming direction
         Vector2 aimDirection = pInput.GetAiming();
-        RenderLine(aimDirection);
 
         //Launching to hooks
         if (!isFiring && pInput.IsFiring())
@@ -59,18 +59,12 @@ public class RopeLauncher : MonoBehaviour
         }
         else if (isFiring)
         {
+            RenderLine(aimDirection);
+
             if (Time.time - lastCacheTime > 0.5f)
                 CacheHooks();
 
-            if (aimDirection == Vector2.zero)
-            {
-                if (selectedHook)
-                {
-                    selectedHook.Deselect();
-                    selectedHook = null;
-                }
-            }
-            else
+            if (aimDirection != Vector2.zero)
             {
                 GameObject hookObj = GetHook(aimDirection);
 
@@ -98,6 +92,7 @@ public class RopeLauncher : MonoBehaviour
             //Fire gun
             if (!pInput.IsFiring())
             {
+                RenderLine(Vector2.zero);
                 isFiring = false;
 
                 if (selectedHook)
@@ -108,7 +103,7 @@ public class RopeLauncher : MonoBehaviour
                         ropeEnabled = true;
 
                         ropeShot = Instantiate(rope).GetComponent<LineRenderer>();
-                        ropeShot.SetPosition(1, selectedHook.transform.position);
+                        shootTime = 0.6f;
 
                         selectedHook.isConnected++;
                         selectedHook.Deselect();
@@ -120,7 +115,11 @@ public class RopeLauncher : MonoBehaviour
         //Update rope
         if (ropeShot)
         {
+            shootTime = Mathf.Max(0, shootTime - Time.deltaTime * 2.0f);
+
             ropeShot.SetPosition(0, gunObj.position);
+            ropeShot.SetPosition(1, gunObj.position + (selectedHook.transform.position - gunObj.position) * (1 - shootTime));
+
             float distance = Vector3.Distance(gunObj.position, selectedHook.transform.position);
 
             if (ropeEnabled && distance > maxDistance)
