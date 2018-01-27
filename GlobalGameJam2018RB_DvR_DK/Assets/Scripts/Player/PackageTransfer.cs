@@ -19,6 +19,9 @@ public class PackageTransfer : MonoBehaviour
 
     void Update()
     {
+        if (!pInput.IsActive())
+            return;
+
         if (pInput.IsActing())
         {
             GameObject packageObj = GetClosestPackage(maxDistance);

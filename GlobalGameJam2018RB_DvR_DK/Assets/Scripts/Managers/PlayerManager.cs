@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -45,7 +44,7 @@ public class PlayerManager : MonoBehaviour
                 GameObject newSkin = GameObject.Instantiate(SkinGameObjects[i], newPlayer.transform);
                 LookDirection lookDirectionOfSkin = newSkin.GetComponent<LookDirection>();
                 PlayerMovement playerInput = newPlayer.GetComponent<PlayerMovement>();
-                playerInput.LookDirection = lookDirectionOfSkin;
+                playerInput.lookDirection = lookDirectionOfSkin;
                 PlayerInput pInput = newPlayer.GetComponent<PlayerInput>();
                 pInput.controllerId = i;
                 pInput.controllersManager = ControllersManager;

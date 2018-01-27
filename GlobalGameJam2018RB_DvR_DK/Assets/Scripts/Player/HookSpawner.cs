@@ -20,6 +20,9 @@ public class HookSpawner : MonoBehaviour
 
     void Update()
     {
+        if (!pInput.IsActive())
+            return;
+
         if (!isFiring && pInput.IsFiring())
         {
             if (Time.time - lastFireTime > cooldownTime)
