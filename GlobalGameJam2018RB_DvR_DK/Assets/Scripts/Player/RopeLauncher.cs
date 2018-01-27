@@ -20,8 +20,6 @@ public class RopeLauncher : MonoBehaviour
     bool ropeEnabled;
     Hook selectedHook;
 
-    List<LineRenderer> ropes = new List<LineRenderer>();
-
     PlayerInput pInput;
 
     void Start()

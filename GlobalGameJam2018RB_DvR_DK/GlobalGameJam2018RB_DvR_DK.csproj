@@ -314,15 +314,18 @@
     <Compile Include="Assets\Scripts\Input\ControllersManager.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Managers\RopeManager.cs" />
+    <Compile Include="Assets\Scripts\Objects\EndCentre.cs" />
     <Compile Include="Assets\Scripts\Objects\Hook.cs" />
     <Compile Include="Assets\Scripts\Objects\Package.cs" />
-    <Compile Include="Assets\Scripts\Objects\Rope.cs" />
+    <Compile Include="Assets\Scripts\Objects\RopeColor.cs" />
+    <Compile Include="Assets\Scripts\Objects\Terminal.cs" />
     <Compile Include="Assets\Scripts\Player\HookSpawner.cs" />
     <Compile Include="Assets\Scripts\Player\LookDirection.cs" />
     <Compile Include="Assets\Scripts\Player\PackageTransfer.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\RopeLauncher.cs" />
+    <Compile Include="Assets\Scripts\Player\TerminalInteract.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\XInputDotNet\Docs.txt" />
