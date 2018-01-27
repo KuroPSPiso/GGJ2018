@@ -49,17 +49,17 @@ public class ControllersManager : MonoBehaviour
     }
 
     private void Start()
-	{
-	    this.Reset();
-	    _controllers = new ControllerControl[4];
-	    GetControllers();
+    {
+        this.Reset();
+        _controllers = new ControllerControl[4];
+        GetControllers();
     }
 
-	private void Update()
-	{
-		GetControllers();
-		UpdateControllers();
-	    UpdateReadyState();
+    private void Update()
+    {
+        GetControllers();
+        UpdateControllers();
+        UpdateReadyState();
     }
 
     private void UpdateReadyState()
@@ -103,17 +103,17 @@ public class ControllersManager : MonoBehaviour
     }
 
     private void GetControllers()
-	{
-	    for (int i = 0; i < _controllers.Length; i++)
-	    {
-	        if (_controllers[i] == null && GamePad.GetState((PlayerIndex)i).IsConnected)
-	        {
-	            _controllers[i] = new ControllerControl
-	            {
-	                ControllerIndex = (PlayerIndex)i
-	            };
-	        }
-	    }
+    {
+        for (int i = 0; i < _controllers.Length; i++)
+        {
+            if (_controllers[i] == null && GamePad.GetState((PlayerIndex)i).IsConnected)
+            {
+                _controllers[i] = new ControllerControl
+                {
+                    ControllerIndex = (PlayerIndex)i
+                };
+            }
+        }
     }
 
     private int GetIndexOfGenericController()
@@ -131,15 +131,15 @@ public class ControllersManager : MonoBehaviour
         return -1;
     }
 
-	private void UpdateControllers()
-	{
-		for (int i = 0; i < _controllers.Length; i++)
-		{
-			if (_controllers[i] != null)
-			{
-				_controllers[i].Update();
+    private void UpdateControllers()
+    {
+        for (int i = 0; i < _controllers.Length; i++)
+        {
+            if (_controllers[i] != null)
+            {
+                _controllers[i].Update();
             }
-		}
+        }
     }
 
     public Vector2 GetLeftAnalog(int controllerId)
