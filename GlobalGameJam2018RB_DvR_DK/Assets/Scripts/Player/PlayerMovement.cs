@@ -3,9 +3,9 @@
 public class PlayerMovement : MonoBehaviour
 {
     //Parameters
-    public LookDirection LookDirection;
-    public float JumpStrenght;
-    public float ForwardSpeed;
+    public LookDirection lookDirection;
+    public float jumpStrength;
+    public float forwardSpeed;
 
     //Private members
     private const int JumpCountLimit = 2;
@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        this._rigidbody2D = this.gameObject.GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         pInput = GetComponent<PlayerInput>();
     }
 
@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
         if (!pInput.IsActive())
             return;
 
-        //jump
+        //Jump
         bool jumped = false;
 
         if (this._isWalled)
@@ -39,39 +39,38 @@ public class PlayerMovement : MonoBehaviour
                 jumped = true;
                 this._jumpCount += 1;
                 jumpOffDirection = (this._lastWallHit.position.x > this.transform.position.x) ? -1f : 1f;
-                _rigidbody2D.velocity = new Vector2(((jumped) ? jumpOffDirection * this.ForwardSpeed / 2 : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? this.JumpStrenght : 0));
+                _rigidbody2D.velocity = new Vector2(((jumped) ? jumpOffDirection * this.forwardSpeed / 2 : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? this.jumpStrength : 0));
             }
         }
         else if (this._isGrounded || this._jumpCount < JumpCountLimit - 1)
         {
-
             if (pInput.IsJumping(true))
             {
                 jumped = true;
                 this._jumpCount += 1;
             }
-            _rigidbody2D.velocity = new Vector2(((jumped) ? pInput.GetMovement().x * this.ForwardSpeed / 2 : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? this.JumpStrenght : 0));
+            _rigidbody2D.velocity = new Vector2(((jumped) ? pInput.GetMovement().x * this.forwardSpeed / 2 : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? this.jumpStrength : 0));
         }
 
 
         //Walk
         if (this._isGrounded)
         {
-            _rigidbody2D.velocity = new Vector2(pInput.GetMovement().x * this.ForwardSpeed, _rigidbody2D.velocity.y + ((jumped) ? this.JumpStrenght : 0));
+            _rigidbody2D.velocity = new Vector2(pInput.GetMovement().x * this.forwardSpeed, _rigidbody2D.velocity.y + ((jumped) ? this.jumpStrength : 0));
         }
 
         //LookDirection
         if (pInput.GetMovement().x > 0)
         {
-            LookDirection.SetTurnLeft();
+            lookDirection.SetTurnLeft();
         }
         else if (pInput.GetMovement().x < 0)
         {
-            LookDirection.SetTurnRight();
+            lookDirection.SetTurnRight();
         }
         else
         {
-            LookDirection.SetNeutral();
+            lookDirection.SetNeutral();
         }
     }
 
