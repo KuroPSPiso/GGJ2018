@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
     public RopeManager ropeManager;
     public GameObject PlayerGameObject;
     public GameObject[] SkinGameObjects;
+    public Transform[] PlayerSpawns;
 
     private List<GameObject> _playerGameObjects = new List<GameObject>(4);
 
@@ -51,6 +52,15 @@ public class PlayerManager : MonoBehaviour
                 pInput.controllersManager = ControllersManager;
                 pInput.ropeManager = ropeManager;
                 _playerGameObjects.Add(newPlayer);
+
+                if(i < 2)
+                {
+                    newPlayer.transform.position = PlayerSpawns[0].position;
+                }
+                else
+                {
+                    newPlayer.transform.position = PlayerSpawns[1].position;
+                }
 
                 if (i % 2 == 0)
                 {
