@@ -118,12 +118,12 @@ public class RopeLauncher : MonoBehaviour
 
             if (ropeEnabled && distance > maxDistance)
             {
-                ropeShot.GetComponent<Rope>().Disable();
+                ropeShot.GetComponent<RopeColor>().Disable();
                 ropeEnabled = false;
             }
             else if (!ropeEnabled && distance < maxDistance)
             {
-                ropeShot.GetComponent<Rope>().ResetColor();
+                ropeShot.GetComponent<RopeColor>().ResetColor();
                 ropeEnabled = true;
             }
         }

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class HookSpawner : MonoBehaviour
 {
     //Parameters
-    public float cooldownTime = 1.0f;
+    public int nHooks = 3;
     public Transform gunObj;
     public GameObject hook;
 
@@ -25,12 +26,24 @@ public class HookSpawner : MonoBehaviour
 
         if (!isFiring && pInput.IsFiring())
         {
-            if (Time.time - lastFireTime > cooldownTime)
-            {
-                Instantiate(hook, gunObj.transform.position, Quaternion.identity);
+            GameObject hookObj = GetClosestHook(1.0f);
+            isFiring = true;
 
-                lastFireTime = Time.time;
-                isFiring = true;
+            if (hookObj)
+            {
+                Destroy(hookObj);
+                nHooks++;
+            }
+            else
+            {
+                if (nHooks > 0)
+                {
+                    Hook hookScr = Instantiate(hook, gunObj.transform.position, Quaternion.identity).GetComponent<Hook>();
+                    hookScr.isStatic = false;
+                    nHooks--;
+
+                    lastFireTime = Time.time;
+                }
             }
         }
         else if (isFiring)
@@ -38,5 +51,25 @@ public class HookSpawner : MonoBehaviour
             if (!pInput.IsFiring())
                 isFiring = false;
         }
+    }
+
+    GameObject GetClosestHook(float maxDistance)
+    {
+        KeyValuePair<GameObject, float> closest = new KeyValuePair<GameObject, float>(null, maxDistance);
+
+        foreach (GameObject hookObj in GameObject.FindGameObjectsWithTag("Hook"))
+        {
+            Hook hook = hookObj.GetComponent<Hook>();
+
+            if (!hook.isStatic)
+            {
+                float distance = Vector3.Distance(transform.position, hookObj.transform.position);
+
+                if (distance < closest.Value)
+                    closest = new KeyValuePair<GameObject, float>(hookObj, distance);
+            }
+        }
+
+        return closest.Key;
     }
 }

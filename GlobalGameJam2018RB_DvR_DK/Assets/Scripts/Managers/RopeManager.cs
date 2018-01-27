@@ -16,7 +16,7 @@ public class RopeManager : MonoBehaviour
                 Vector3 from = rope.lineRenderer.GetPosition(0);
                 Vector3 to = rope.lineRenderer.GetPosition(1);
 
-                float distance = Vector3.Distance(NearestPointOnFiniteLine(from, to, pos), pos);
+                float distance = Vector3.Distance(NearestPointOnLine(from, to, pos), pos);
 
                 if (distance < closest.Value)
                     closest = new KeyValuePair<Rope, float>(rope, distance);
@@ -26,7 +26,8 @@ public class RopeManager : MonoBehaviour
         return closest.Key;
     }
 
-    static Vector3 NearestPointOnFiniteLine(Vector3 start, Vector3 end, Vector3 pnt)
+    //Find nearest point on a line
+    static Vector3 NearestPointOnLine(Vector3 start, Vector3 end, Vector3 pnt)
     {
         Vector3 line = (end - start);
         float len = line.magnitude;
@@ -91,6 +92,7 @@ public class RopeManager : MonoBehaviour
             this.lineRenderer = lineRenderer;
             this.from = from;
             this.to = to;
+
             inTransfer = 0;
         }
     }

@@ -10,6 +10,7 @@ public class Package : MonoBehaviour
     //Public members
     public Transform hookedTo;
     public RopeManager.Rope ropeTransfer;
+    public int packageType;
 
     void Update()
     {

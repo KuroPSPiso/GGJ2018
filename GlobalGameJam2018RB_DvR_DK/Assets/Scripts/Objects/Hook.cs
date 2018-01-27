@@ -2,13 +2,19 @@
 
 public class Hook : MonoBehaviour
 {
+    //Parameters
+    public bool isStatic = true;
+
+    public Material matSelect;
+    public Material matDeselect;
+
     public void Select()
     {
-        GetComponent<SpriteRenderer>().color = Color.red;
+        GetComponent<MeshRenderer>().material = matSelect;
     }
 
     public void Deselect()
     {
-        GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponent<MeshRenderer>().material = matDeselect;
     }
 }

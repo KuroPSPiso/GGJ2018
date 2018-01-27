@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
-public class Rope : MonoBehaviour
+public class RopeColor : MonoBehaviour
 {
     //Parameters
     public Material matEnabled;
     public Material matDisabled;
+    public Material matCharged;
 
     public void Disable()
     {
@@ -18,6 +19,6 @@ public class Rope : MonoBehaviour
 
     public void Highlight()
     {
-        GetComponent<LineRenderer>().material = matDisabled;
+        GetComponent<LineRenderer>().material = matCharged;
     }
 }
