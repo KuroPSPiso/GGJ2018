@@ -3,46 +3,107 @@
 public class PlayerMovement : MonoBehaviour
 {
     //Parameters
-    public float moveForce = 365f;
-    public float maxSpeed = 5f;
-    public float jumpForce = 1000f;
-    public Transform groundCheck;
+    public LookDirection LookDirection;
+    public float JumpStrenght;
+    public float ForwardSpeed;
 
     //Private members
-    bool grounded = false;
-    bool jump = false;
-    Rigidbody2D rb;
+    private const int JumpCountLimit = 2;
+    private Rigidbody2D _rigidbody2D = null;
+    private bool _isGrounded = false;
+    private bool _isWalled = false;
+    private Transform _lastWallHit = null;
+    private int _jumpCount = 0;
 
     PlayerInput pInput;
 
     void Start()
     {
+        this._rigidbody2D = this.gameObject.GetComponent<Rigidbody2D>();
         pInput = GetComponent<PlayerInput>();
-        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        if (!pInput.IsActive())
+            return;
 
-        if (grounded && pInput.IsJumping())
-            jump = true;
+        //jump
+        bool jumped = false;
+
+        if (this._isWalled)
+        {
+            if (pInput.IsJumping(true))
+            {
+                float jumpOffDirection = 0;
+                jumped = true;
+                this._jumpCount += 1;
+                jumpOffDirection = (this._lastWallHit.position.x > this.transform.position.x) ? -1f : 1f;
+                _rigidbody2D.velocity = new Vector2(((jumped) ? jumpOffDirection * this.ForwardSpeed / 2 : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? this.JumpStrenght : 0));
+            }
+        }
+        else if (this._isGrounded || this._jumpCount < JumpCountLimit - 1)
+        {
+
+            if (pInput.IsJumping(true))
+            {
+                jumped = true;
+                this._jumpCount += 1;
+            }
+            _rigidbody2D.velocity = new Vector2(((jumped) ? pInput.GetMovement().x * this.ForwardSpeed / 2 : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? this.JumpStrenght : 0));
+        }
+
+
+        //Walk
+        if (this._isGrounded)
+        {
+            _rigidbody2D.velocity = new Vector2(pInput.GetMovement().x * this.ForwardSpeed, _rigidbody2D.velocity.y + ((jumped) ? this.JumpStrenght : 0));
+        }
+
+        //LookDirection
+        if (pInput.GetMovement().x > 0)
+        {
+            LookDirection.SetTurnLeft();
+        }
+        else if (pInput.GetMovement().x < 0)
+        {
+            LookDirection.SetTurnRight();
+        }
+        else
+        {
+            LookDirection.SetNeutral();
+        }
     }
 
-    void FixedUpdate()
+    void OnCollisionStay2D(Collision2D coll)
     {
-        float h = pInput.GetMovement().x;
-
-        if (h * rb.velocity.x < maxSpeed)
-            rb.AddForce(Vector2.right * h * moveForce);
-
-        if (Mathf.Abs(rb.velocity.x) > maxSpeed)
-            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);
-
-        if (jump)
+        if (coll.gameObject.layer == 8)
         {
-            rb.AddForce(new Vector2(0f, jumpForce));
-            jump = false;
+            this._isGrounded = true;
+            this._jumpCount = 0;
+        }
+
+        if (coll.gameObject.layer == 9)
+        {
+            this._isWalled = true;
+            this._jumpCount = 0;
+            this._lastWallHit = coll.gameObject.transform;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D coll)
+    {
+        if (coll.gameObject.layer == 8)
+        {
+            this._isGrounded = false;
+            this._jumpCount = 0;
+        }
+
+        if (coll.gameObject.layer == 9)
+        {
+            this._isWalled = false;
+            this._jumpCount = 0;
+            this._lastWallHit = coll.gameObject.transform;
         }
     }
 }

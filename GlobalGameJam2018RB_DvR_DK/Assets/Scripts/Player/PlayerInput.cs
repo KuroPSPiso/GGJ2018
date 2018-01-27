@@ -2,8 +2,13 @@
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] ControllersManager controllersManager;
-    [SerializeField] int controllerId;
+    public ControllersManager controllersManager;
+    public int controllerId;
+
+    public bool IsActive()
+    {
+        return controllersManager.IsControllerActive(controllerId);
+    }
 
     public Vector2 GetMovement()
     {
@@ -15,9 +20,9 @@ public class PlayerInput : MonoBehaviour
         return controllersManager.GetRightAnalog(controllerId);
     }
 
-    public bool IsJumping()
+    public bool IsJumping(bool mustRelease = false)
     {
-        return controllersManager.GetLeftTrigger(controllerId) > 0.25f;
+        return controllersManager.GetButton0(controllerId, mustRelease);
     }
 
     public bool IsFiring()
@@ -27,6 +32,6 @@ public class PlayerInput : MonoBehaviour
 
     public bool IsActing()
     {
-        return controllersManager.GetButton0(controllerId);
+        return controllersManager.GetLeftTrigger(controllerId) > 0.25f;
     }
 }

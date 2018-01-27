@@ -13,26 +13,26 @@ public class PlayerManager : MonoBehaviour
 
     private List<GameObject> _playerGameObjects = new List<GameObject>(4);
 
-	// Use this for initialization
-	void Start ()
-	{
-	    if (SkinGameObjects != null)
-	    {
-	        SpawnPlayers();
+    // Use this for initialization
+    void Start()
+    {
+        if (SkinGameObjects != null)
+        {
+            SpawnPlayers();
 
-	        int count = 0;
+            int count = 0;
 
             for (int i = 0; i < (count = _playerGameObjects.Count); i++)
             {
                 for (int j = 0; j < count; j++)
-	            {
-	                if (i != j)
-	                {
-	                    Physics2D.IgnoreCollision(_playerGameObjects[i].GetComponent<BoxCollider2D>(), _playerGameObjects[j].GetComponent<BoxCollider2D>());
+                {
+                    if (i != j)
+                    {
+                        Physics2D.IgnoreCollision(_playerGameObjects[i].GetComponent<BoxCollider2D>(), _playerGameObjects[j].GetComponent<BoxCollider2D>());
                     }
-	            }
-	        }
-	    }
+                }
+            }
+        }
     }
 
     void SpawnPlayers()
@@ -44,10 +44,11 @@ public class PlayerManager : MonoBehaviour
                 GameObject newPlayer = GameObject.Instantiate(PlayerGameObject);
                 GameObject newSkin = GameObject.Instantiate(SkinGameObjects[i], newPlayer.transform);
                 LookDirection lookDirectionOfSkin = newSkin.GetComponent<LookDirection>();
-                PlayerInput playerInput = newPlayer.GetComponent<PlayerInput>();
+                PlayerMovement playerInput = newPlayer.GetComponent<PlayerMovement>();
                 playerInput.LookDirection = lookDirectionOfSkin;
-                playerInput.ControllerId = i;
-                playerInput.ControllerManagerEntity = ControllersManager;
+                PlayerInput pInput = newPlayer.GetComponent<PlayerInput>();
+                pInput.controllerId = i;
+                pInput.controllersManager = ControllersManager;
                 _playerGameObjects.Add(newPlayer);
             }
         }
