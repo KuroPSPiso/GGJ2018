@@ -10,6 +10,8 @@ public class PlayerManager : MonoBehaviour
     public RopeManager ropeManager;
     public GameObject PlayerGameObject;
     public GameObject[] SkinGameObjects;
+    public GameObject[] packages;
+    public Transform[] beginCentres;
     public Transform[] PlayerSpawns;
 
     private List<GameObject> _playerGameObjects = new List<GameObject>(4);
@@ -60,11 +62,16 @@ public class PlayerManager : MonoBehaviour
                 if (i % 2 == 0)
                 {
                     newPlayer.GetComponent<RopeLauncher>().enabled = false;
+                    newPlayer.GetComponent<TerminalInteract>().enabled = false;
                 }
                 else
                 {
                     newPlayer.GetComponent<HookSpawner>().enabled = false;
                     newPlayer.GetComponent<PackageTransfer>().enabled = false;
+
+                    TerminalInteract tInteract = newPlayer.GetComponent<TerminalInteract>();
+                    tInteract.beginCentre = beginCentres[(i - 1) / 2];
+                    tInteract.packet = packages[(i - 1) / 2];
                 }
             }
         }

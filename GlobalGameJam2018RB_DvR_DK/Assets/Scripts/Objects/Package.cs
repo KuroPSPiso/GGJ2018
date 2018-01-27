@@ -6,10 +6,14 @@ public class Package : MonoBehaviour
     public float rotateSpeed = 100.0f;
     public float rotateDistance = 1.0f;
     public float moveSpeed = 3.0f;
+    public float movingToEndTime = 3.0f;
 
     //Public members
     public Transform hookedTo;
+    public bool inTransfer = true;
     public RopeManager.Rope ropeTransfer;
+    EndCentre movingToEnd;
+    
     public int packageType;
 
     void Update()
@@ -25,8 +29,30 @@ public class Package : MonoBehaviour
         {
             transform.RotateAround(hookedTo.position, Vector3.forward, rotateSpeed * Time.deltaTime);
 
-            if (ropeTransfer != null)
+            if (movingToEnd)
             {
+                if (movingToEndTime <= 0.0f)
+                    Destroy(gameObject);
+                else
+                {
+                    movingToEndTime -= Time.deltaTime;
+
+                    if (movingToEndTime <= 0.0f)
+                    {
+                        hookedTo = movingToEnd.endPoint;
+                        movingToEnd.IncreaseData();
+                    }
+                }
+            }
+            else if (ropeTransfer != null)
+            {
+                EndCentre endCentre = ropeTransfer.to as EndCentre;
+
+                if (endCentre)
+                    movingToEnd = endCentre;
+                else
+                    inTransfer = false;
+
                 ropeTransfer.inTransfer--;
                 ropeTransfer = null;
             }
