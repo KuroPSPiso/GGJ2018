@@ -116,7 +116,5 @@ MonoBehaviour:
   rotateSpeed: 100
   rotateDistance: 1
   moveSpeed: 3
-  movingToEndTime: 3
   hookedTo: {fileID: 0}
-  inTransfer: 1
   packageType: 0

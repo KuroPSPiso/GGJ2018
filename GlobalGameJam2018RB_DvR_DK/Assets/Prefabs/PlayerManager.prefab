@@ -110,8 +110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCount: 4
-  ControllersManager: {fileID: 0}
-  ropeManager: {fileID: 0}
+  ControllersManager: {fileID: 114923863589471386, guid: 0fda7f4d7d47d3347bf60692137adb3c,
+    type: 2}
+  ropeManager: {fileID: 114991967534603328, guid: df918020415427246b65f43eb0f8f5b5,
+    type: 2}
   PlayerGameObject: {fileID: 1773361027967070, guid: d81bbffa9e8ae03418ef7f70aa14df0b,
     type: 2}
   SkinGameObjects:

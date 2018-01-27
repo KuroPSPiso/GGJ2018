@@ -164,7 +164,7 @@ public class ControllersManager : MonoBehaviour
         {
             return new Vector2(
                 Input.GetAxis(string.Format("Joy{0}RightX", GetIndexOfGenericController() + 1)),
-                Input.GetAxis(string.Format("Joy{0}RightY", GetIndexOfGenericController() + 1))
+                Input.GetAxis(string.Format("Joy{0}RightY", GetIndexOfGenericController() + 1)) * -1
             );
         }
 
@@ -224,7 +224,7 @@ public class ControllersManager : MonoBehaviour
     {
         if (MappingType == ControllerMappingType.Both && controllerId == 3)
         {
-            return (Input.GetButton(string.Format("Joy{0}Button6", GetIndexOfGenericController() + 1)) ? 0f : 1f);
+            return (Input.GetButton(string.Format("Joy{0}Button6", GetIndexOfGenericController() + 1)) ? 1f : 0f);
         }
 
         return _controllers[controllerId].State.Triggers.Left;
@@ -234,7 +234,7 @@ public class ControllersManager : MonoBehaviour
     {
         if (MappingType == ControllerMappingType.Both && controllerId == 3)
         {
-            return (Input.GetButton(string.Format("Joy{0}Button7", GetIndexOfGenericController() + 1)) ? 0f : 1f);
+            return (Input.GetButton(string.Format("Joy{0}Button7", GetIndexOfGenericController() + 1)) ? 1f : 0f);
         }
 
         return _controllers[controllerId].State.Triggers.Right;
