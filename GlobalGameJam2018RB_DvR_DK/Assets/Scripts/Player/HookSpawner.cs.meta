@@ -1,11 +1,13 @@
 fileFormatVersion: 2
-guid: 2324de9e1980e694b98d0b990aad03bb
-timeCreated: 1517008829
+guid: 3b6f0080169937245bad5921c89c51e6
+timeCreated: 1517051684
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - gunObj: {instanceID: 0}
+  - hook: {fileID: 1226745297333256, guid: ce1121a8f13123d42ace9610f64b8ffe, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
