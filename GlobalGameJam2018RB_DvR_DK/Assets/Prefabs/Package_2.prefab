@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1910146234463432}
   m_LocalRotation: {x: 0.27042434, y: -0.020891132, z: 0.34739667, w: 0.8976357}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -116,7 +116,5 @@ MonoBehaviour:
   rotateSpeed: 100
   rotateDistance: 1
   moveSpeed: 3
-  movingToEndTime: 3
   hookedTo: {fileID: 0}
-  inTransfer: 1
   packageType: 1
