@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class RopeLauncher : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class RopeLauncher : MonoBehaviour
     public int maxRopes = 2;
     public Transform gunObj;
     public GameObject rope;
+    public Color LaunchDirectionColor = Color.blue;
 
     //Private members
     AngleCollection hooksCache;
@@ -25,6 +27,10 @@ public class RopeLauncher : MonoBehaviour
     void Start()
     {
         pInput = GetComponent<PlayerInput>();
+        if (this.gameObject.GetComponent<LineRenderer>() == null)
+        {
+            this.gameObject.AddComponent<LineRenderer>();
+        }
     }
 
     void Update()
@@ -34,6 +40,7 @@ public class RopeLauncher : MonoBehaviour
 
         //Get aiming direction
         Vector2 aimDirection = pInput.GetAiming();
+        RenderLine(aimDirection);
 
         //Launching to hooks
         if (!isFiring && pInput.IsFiring())
@@ -155,6 +162,28 @@ public class RopeLauncher : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void RenderLine(Vector2 aimDirection)
+    {
+        LineRenderer lineRenderer = this.gameObject.GetComponent<LineRenderer>();
+        lineRenderer.shadowCastingMode = ShadowCastingMode.Off;
+        lineRenderer.receiveShadows = false;
+        lineRenderer.motionVectorGenerationMode = MotionVectorGenerationMode.Camera;
+
+        float x = aimDirection.x;
+        float y = aimDirection.y;
+
+        lineRenderer.SetPositions(new Vector3[]
+        {
+            this.gameObject.transform.position + new Vector3(0, 0.5f, 0),
+            this.gameObject.transform.position + new Vector3(0, 0.5f, 0) + new Vector3(x, y, 0) * 1
+        });
+        lineRenderer.startColor = LaunchDirectionColor;
+        lineRenderer.endColor = LaunchDirectionColor;
+        lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
+        lineRenderer.widthCurve = AnimationCurve.Linear(0, 0.10f, 1, 0f);
+        lineRenderer.enabled = true;
     }
 
     void CacheHooks()
