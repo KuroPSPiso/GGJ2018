@@ -5,6 +5,8 @@ public class PlayerInput : MonoBehaviour
     public ControllersManager controllersManager;
     public int controllerId;
 
+    public RopeManager ropeManager;
+
     public bool IsActive()
     {
         return controllersManager.IsControllerActive(controllerId);

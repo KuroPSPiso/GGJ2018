@@ -9,6 +9,7 @@ public class Package : MonoBehaviour
 
     //Public members
     public Transform hookedTo;
+    public RopeManager.Rope ropeTransfer;
 
     void Update()
     {
@@ -17,9 +18,17 @@ public class Package : MonoBehaviour
         if (distanceToTarget > rotateDistance)
         {
             Vector3 moveDir = (hookedTo.position - transform.position).normalized;
-            transform.position += moveDir * Mathf.Min(moveSpeed * Time.deltaTime, distanceToTarget - rotateDistance);
+            transform.position += moveDir * Mathf.Min(moveSpeed * Time.deltaTime, distanceToTarget);
         }
         else
+        {
             transform.RotateAround(hookedTo.position, Vector3.forward, rotateSpeed * Time.deltaTime);
+
+            if (ropeTransfer != null)
+            {
+                ropeTransfer.inTransfer--;
+                ropeTransfer = null;
+            }
+        }
     }
 }

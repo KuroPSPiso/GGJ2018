@@ -11,8 +11,6 @@ public class RopeLauncher : MonoBehaviour
     public Transform gunObj;
     public GameObject rope;
 
-    public RopeManager ropeManager;
-
     //Private members
     AngleCollection hooksCache;
     float lastCacheTime;
@@ -99,18 +97,15 @@ public class RopeLauncher : MonoBehaviour
                 if (selectedHook)
                 {
                     //Spawn rope
-                    ropeEnabled = true;
-
-                    ropeShot = Instantiate(rope).GetComponent<LineRenderer>();
-                    ropeShot.SetPosition(1, selectedHook.transform.position);
-
-                    if (ropes.Count >= maxRopes)
+                    if (pInput.ropeManager.TrimRopes(pInput, maxRopes))
                     {
-                        Destroy(ropes[0]);
-                        ropes.RemoveAt(0);
-                    }
+                        ropeEnabled = true;
 
-                    selectedHook.Deselect();
+                        ropeShot = Instantiate(rope).GetComponent<LineRenderer>();
+                        ropeShot.SetPosition(1, selectedHook.transform.position);
+
+                        selectedHook.Deselect();
+                    }
                 }
             }
         }
@@ -119,7 +114,7 @@ public class RopeLauncher : MonoBehaviour
         if (ropeShot)
         {
             ropeShot.SetPosition(0, gunObj.position);
-            float distance = Vector3.Distance(gunObj.position, ropeShot.transform.position);
+            float distance = Vector3.Distance(gunObj.position, selectedHook.transform.position);
 
             if (ropeEnabled && distance > maxDistance)
             {
@@ -128,7 +123,7 @@ public class RopeLauncher : MonoBehaviour
             }
             else if (!ropeEnabled && distance < maxDistance)
             {
-                ropeShot.GetComponent<Rope>().Enable();
+                ropeShot.GetComponent<Rope>().ResetColor();
                 ropeEnabled = true;
             }
         }
@@ -149,7 +144,7 @@ public class RopeLauncher : MonoBehaviour
                     ropeObj.SetPosition(0, other.transform.position);
                     ropeObj.SetPosition(1, selectedHook.transform.position);
 
-                    ropes.Add(ropeObj);
+                    pInput.ropeManager.AddRope(pInput, ropeObj, selectedHook, other.GetComponent<Hook>());
 
                     //Remove shot rope
                     Destroy(ropeShot);

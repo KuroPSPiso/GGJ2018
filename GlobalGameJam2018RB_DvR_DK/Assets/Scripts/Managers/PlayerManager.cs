@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
     public int PlayerCount = 4;
 
     public ControllersManager ControllersManager;
+    public RopeManager ropeManager;
     public GameObject PlayerGameObject;
     public GameObject[] SkinGameObjects;
 
@@ -48,6 +49,7 @@ public class PlayerManager : MonoBehaviour
                 PlayerInput pInput = newPlayer.GetComponent<PlayerInput>();
                 pInput.controllerId = i;
                 pInput.controllersManager = ControllersManager;
+                pInput.ropeManager = ropeManager;
                 _playerGameObjects.Add(newPlayer);
             }
         }

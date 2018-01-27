@@ -7,8 +7,8 @@ public class PackageTransfer : MonoBehaviour
     public float maxDistance = 2.0f;
 
     //Private members
-    float lastFireTime = 0.0f;
-    bool isFiring = false;
+    bool isActing = false;
+    Rope prevSelected;
 
     PlayerInput pInput;
 
@@ -23,28 +23,65 @@ public class PackageTransfer : MonoBehaviour
             return;
 
         if (pInput.IsActing())
+            isActing = true;
+
+        if (isActing)
         {
-            GameObject packageObj = GetClosestPackage(maxDistance);
+            RopeManager.Rope closestRope = pInput.ropeManager.GetClosestRope(transform.position, maxDistance);
 
-            if(packageObj)
+            if (!pInput.IsActing())
             {
+                isActing = false;
 
+                if (prevSelected)
+                {
+                    prevSelected.ResetColor();
+                    prevSelected = null;
+                }
+
+                if (closestRope != null)
+                    TransferPackage(closestRope);
+            }
+            else
+            {
+                if (closestRope != null)
+                {
+                    Rope selected = closestRope.lineRenderer.GetComponent<Rope>();
+
+                    if (prevSelected != selected)
+                    {
+                        if (prevSelected)
+                            prevSelected.ResetColor();
+
+                        prevSelected = selected;
+                        prevSelected.Highlight();
+                    }
+                }
+                else if (prevSelected)
+                {
+                    prevSelected.ResetColor();
+                    prevSelected = null;
+                }
             }
         }
     }
 
-    GameObject GetClosestPackage(float maxDistance = 2.0f)
+    bool TransferPackage(RopeManager.Rope rope)
     {
-        Tuple<GameObject, float> closest = Tuple.Create<GameObject, float>(null, maxDistance);
-
         foreach (GameObject packageObj in GameObject.FindGameObjectsWithTag("Package"))
         {
-            float distance = Vector3.Distance(transform.position, packageObj.transform.position);
+            Package package = packageObj.GetComponent<Package>();
 
-            if (distance < closest.Item2)
-                closest = Tuple.Create(packageObj, distance);
+            if (package.ropeTransfer == null && package.hookedTo == rope.from.transform)
+            {
+                package.hookedTo = rope.to.transform;
+                package.ropeTransfer = rope;
+                rope.inTransfer++;
+
+                return true;
+            }
         }
 
-        return closest.Item1;
+        return false;
     }
 }
