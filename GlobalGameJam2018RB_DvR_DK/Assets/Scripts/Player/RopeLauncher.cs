@@ -4,208 +4,213 @@ using UnityEngine;
 
 public class RopeLauncher : MonoBehaviour
 {
-    //Parameters
-    public float maxDistance = 10f;
-    public float maxAngle = 30f;
-    public int maxRopes = 2;
-    public Transform gunObj;
-    public GameObject rope;
+	//Parameters
+	public float maxDistance = 10f;
+	public float maxAngle = 30f;
+	public int maxRopes = 2;
+	public Transform gunObj;
+	public GameObject rope;
 
-    public RopeManager ropeManager;
+	public RopeManager ropeManager;
 
-    //Private members
-    AngleCollection hooksCache;
-    float lastCacheTime;
+	//Private members
+	AngleCollection hooksCache;
+	float lastCacheTime;
 
-    bool isFiring = false;
-    LineRenderer ropeShot;
-    bool ropeEnabled;
-    Hook selectedHook;
+	bool isFiring = false;
+	LineRenderer ropeShot;
+	bool ropeEnabled;
+	Hook selectedHook;
 
-    List<LineRenderer> ropes = new List<LineRenderer>();
+	List<LineRenderer> ropes = new List<LineRenderer>();
 
-    PlayerInput pInput;
+	PlayerInput pInput;
 
-    void Start()
-    {
-        pInput = GetComponent<PlayerInput>();
-    }
+	void Start()
+	{
+		pInput = GetComponent<PlayerInput>();
+	}
 
-    void Update()
-    {
-        //Get aiming direction
-        Vector2 aimDirection = pInput.GetAiming();
+	void Update()
+	{
+		if (!pInput.IsActive())
+		{
+			return;
+		}
 
-        //Launching to hooks
-        if (!isFiring && pInput.IsFiring())
-        {
-            isFiring = true;
-            CacheHooks();
+		//Get aiming direction
+		Vector2 aimDirection = pInput.GetAiming();
 
-            if (ropeShot)
-            {
-                Destroy(ropeShot);
+		//Launching to hooks
+		if (!isFiring && pInput.IsFiring())
+		{
+			isFiring = true;
+			CacheHooks();
 
-                selectedHook = null;
-                ropeShot = null;
-            }
-        }
-        else if (isFiring)
-        {
-            if (Time.time - lastCacheTime > 0.5f)
-                CacheHooks();
+			if (ropeShot)
+			{
+				Destroy(ropeShot);
 
-            if (aimDirection == Vector2.zero)
-            {
-                if (selectedHook)
-                {
-                    selectedHook.Deselect();
-                    selectedHook = null;
-                }
-            }
-            else
-            {
-                GameObject hookObj = GetHook(aimDirection);
+				selectedHook = null;
+				ropeShot = null;
+			}
+		}
+		else if (isFiring)
+		{
+			if (Time.time - lastCacheTime > 0.5f)
+				CacheHooks();
 
-                if (hookObj)
-                {
-                    Vector3 delta = hookObj.transform.position - gunObj.position;
-                    float angle = Mathf.Atan2(delta.y, delta.x) * 180 / Mathf.PI;
-                    Hook hookCmp = hookObj.GetComponent<Hook>();
+			if (aimDirection == Vector2.zero)
+			{
+				if (selectedHook)
+				{
+					selectedHook.Deselect();
+					selectedHook = null;
+				}
+			}
+			else
+			{
+				GameObject hookObj = GetHook(aimDirection);
 
-                    //Rotate gun
-                    gunObj.eulerAngles = new Vector3(0, 0, angle);
+				if (hookObj)
+				{
+					Vector3 delta = hookObj.transform.position - gunObj.position;
+					float angle = Mathf.Atan2(delta.y, delta.x) * 180 / Mathf.PI;
+					Hook hookCmp = hookObj.GetComponent<Hook>();
 
-                    //Select hook
-                    if (hookCmp != selectedHook)
-                    {
-                        if (selectedHook)
-                            selectedHook.Deselect();
+					//Rotate gun
+					gunObj.eulerAngles = new Vector3(0, 0, angle);
 
-                        selectedHook = hookCmp;
-                        selectedHook.Select();
-                    }
-                }
-            }
+					//Select hook
+					if (hookCmp != selectedHook)
+					{
+						if (selectedHook)
+							selectedHook.Deselect();
 
-            //Fire gun
-            if (!pInput.IsFiring())
-            {
-                isFiring = false;
+						selectedHook = hookCmp;
+						selectedHook.Select();
+					}
+				}
+			}
 
-                if (selectedHook)
-                {
-                    //Spawn rope
-                    ropeEnabled = true;
+			//Fire gun
+			if (!pInput.IsFiring())
+			{
+				isFiring = false;
 
-                    ropeShot = Instantiate(rope).GetComponent<LineRenderer>();
-                    ropeShot.SetPosition(1, selectedHook.transform.position);
+				if (selectedHook)
+				{
+					//Spawn rope
+					ropeEnabled = true;
 
-                    if (ropes.Count >= maxRopes)
-                    {
-                        Destroy(ropes[0]);
-                        ropes.RemoveAt(0);
-                    }
+					ropeShot = Instantiate(rope).GetComponent<LineRenderer>();
+					ropeShot.SetPosition(1, selectedHook.transform.position);
 
-                    selectedHook.Deselect();
-                }
-            }
-        }
+					if (ropes.Count >= maxRopes)
+					{
+						Destroy(ropes[0]);
+						ropes.RemoveAt(0);
+					}
 
-        //Update rope
-        if (ropeShot)
-        {
-            ropeShot.SetPosition(0, gunObj.position);
-            float distance = Vector3.Distance(gunObj.position, ropeShot.transform.position);
+					selectedHook.Deselect();
+				}
+			}
+		}
 
-            if (ropeEnabled && distance > maxDistance)
-            {
-                ropeShot.GetComponent<Rope>().Disable();
-                ropeEnabled = false;
-            }
-            else if (!ropeEnabled && distance < maxDistance)
-            {
-                ropeShot.GetComponent<Rope>().Enable();
-                ropeEnabled = true;
-            }
-        }
-    }
+		//Update rope
+		if (ropeShot)
+		{
+			ropeShot.SetPosition(0, gunObj.position);
+			float distance = Vector3.Distance(gunObj.position, ropeShot.transform.position);
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Hook")
-        {
-            if (ropeShot && other.gameObject != selectedHook.gameObject)
-            {
-                float distance = Vector3.Distance(selectedHook.transform.position, other.transform.position);
+			if (ropeEnabled && distance > maxDistance)
+			{
+				ropeShot.GetComponent<Rope>().Disable();
+				ropeEnabled = false;
+			}
+			else if (!ropeEnabled && distance < maxDistance)
+			{
+				ropeShot.GetComponent<Rope>().Enable();
+				ropeEnabled = true;
+			}
+		}
+	}
 
-                if (distance < maxDistance)
-                {
-                    //Attach rope between hooks
-                    LineRenderer ropeObj = Instantiate(rope).GetComponent<LineRenderer>();
-                    ropeObj.SetPosition(0, other.transform.position);
-                    ropeObj.SetPosition(1, selectedHook.transform.position);
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.tag == "Hook")
+		{
+			if (ropeShot && other.gameObject != selectedHook.gameObject)
+			{
+				float distance = Vector3.Distance(selectedHook.transform.position, other.transform.position);
 
-                    ropes.Add(ropeObj);
+				if (distance < maxDistance)
+				{
+					//Attach rope between hooks
+					LineRenderer ropeObj = Instantiate(rope).GetComponent<LineRenderer>();
+					ropeObj.SetPosition(0, other.transform.position);
+					ropeObj.SetPosition(1, selectedHook.transform.position);
 
-                    //Remove shot rope
-                    Destroy(ropeShot);
+					ropes.Add(ropeObj);
 
-                    selectedHook = null;
-                    ropeShot = null;
-                }
-            }
-        }
-    }
+					//Remove shot rope
+					Destroy(ropeShot);
 
-    void CacheHooks()
-    {
-        hooksCache = new AngleCollection();
-        lastCacheTime = Time.time;
+					selectedHook = null;
+					ropeShot = null;
+				}
+			}
+		}
+	}
 
-        foreach (GameObject hookObj in GameObject.FindGameObjectsWithTag("Hook"))
-        {
-            if (Vector3.Distance(gunObj.position, hookObj.transform.position) < maxDistance)
-            {
-                if (!Physics2D.Linecast(gunObj.position, hookObj.transform.position, 1 << LayerMask.NameToLayer("Ground")))
-                {
-                    Vector3 delta = hookObj.transform.position - gunObj.position;
-                    hooksCache.Add(hookObj, Mathf.Atan2(delta.y, delta.x) * 180 / Mathf.PI);
-                }
-            }
-        }
-    }
+	void CacheHooks()
+	{
+		hooksCache = new AngleCollection();
+		lastCacheTime = Time.time;
 
-    GameObject GetHook(Vector2 direction)
-    {
-        return hooksCache.GetClosestTo(Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI, maxAngle);
-    }
+		foreach (GameObject hookObj in GameObject.FindGameObjectsWithTag("Hook"))
+		{
+			if (Vector3.Distance(gunObj.position, hookObj.transform.position) < maxDistance)
+			{
+				if (!Physics2D.Linecast(gunObj.position, hookObj.transform.position, 1 << LayerMask.NameToLayer("Ground")))
+				{
+					Vector3 delta = hookObj.transform.position - gunObj.position;
+					hooksCache.Add(hookObj, Mathf.Atan2(delta.y, delta.x) * 180 / Mathf.PI);
+				}
+			}
+		}
+	}
 
-    //Gameobjects with angles
-    class AngleCollection
-    {
-        List<Tuple<GameObject, float>> objAngles = new List<Tuple<GameObject, float>>();
+	GameObject GetHook(Vector2 direction)
+	{
+		return hooksCache.GetClosestTo(Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI, maxAngle);
+	}
 
-        public void Add(GameObject obj, float angle)
-        {
-            //Add hook to list
-            objAngles.Add(Tuple.Create(obj, angle));
-        }
+	//Gameobjects with angles
+	class AngleCollection
+	{
+		List<KeyValuePair<GameObject, float>> objAngles = new List<KeyValuePair<GameObject, float>>();
 
-        public GameObject GetClosestTo(float angle, float maxAngle = 30f)
-        {
+		public void Add(GameObject obj, float angle)
+		{
+			//Add hook to list
+			objAngles.Add(new KeyValuePair<GameObject, float>(obj, angle));
+		}
+
+		public GameObject GetClosestTo(float angle, float maxAngle = 30f)
+		{
             //Find hook closest to angle
-            Tuple<GameObject, float> closest = Tuple.Create<GameObject, float>(null, maxAngle);
+            KeyValuePair<GameObject, float> closest = new KeyValuePair<GameObject, float>(null, maxAngle);
 
-            foreach (Tuple<GameObject, float> hookAngle in objAngles)
-            {
-                float deltaAngle = Mathf.Abs(Mathf.DeltaAngle(angle, hookAngle.Item2));
+			foreach (KeyValuePair<GameObject, float> hookAngle in objAngles)
+			{
+				float deltaAngle = Mathf.Abs(Mathf.DeltaAngle(angle, hookAngle.Value));
 
-                if (deltaAngle < closest.Item2)
-                    closest = Tuple.Create(hookAngle.Item1, deltaAngle);
-            }
+				if (deltaAngle < closest.Value)
+					closest = new KeyValuePair<GameObject, float>(hookAngle.Key, deltaAngle);
+			}
 
-            return closest.Item1;
-        }
-    }
+			return closest.Key;
+		}
+	}
 }

@@ -293,11 +293,17 @@
   <ItemGroup>
     <Compile Include="Assets\LookDirection.cs" />
     <Compile Include="Assets\PlayerManager.cs" />
-    <Compile Include="Assets\Scripts\CableLauncher.cs" />
-    <Compile Include="Assets\Scripts\ControllerControl.cs" />
-    <Compile Include="Assets\Scripts\ControllersManager.cs" />
-    <Compile Include="Assets\Scripts\Hook.cs" />
-    <Compile Include="Assets\Scripts\PlayerInput.cs" />
+    <Compile Include="Assets\Scripts\Input\ControllerControl.cs" />
+    <Compile Include="Assets\Scripts\Input\ControllersManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\RopeManager.cs" />
+    <Compile Include="Assets\Scripts\Objects\Hook.cs" />
+    <Compile Include="Assets\Scripts\Objects\Package.cs" />
+    <Compile Include="Assets\Scripts\Objects\Rope.cs" />
+    <Compile Include="Assets\Scripts\Player\HookSpawner.cs" />
+    <Compile Include="Assets\Scripts\Player\PackageTransfer.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Player\RopeLauncher.cs" />
     <Compile Include="Assets\Scripts\RandomlyColorChildren.cs" />
   </ItemGroup>
   <ItemGroup>
