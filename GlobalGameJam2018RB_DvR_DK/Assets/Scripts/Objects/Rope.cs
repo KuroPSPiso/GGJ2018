@@ -14,12 +14,10 @@ public class Rope : MonoBehaviour
     public void ResetColor()
     {
         GetComponent<LineRenderer>().material = matEnabled;
-        Debug.Log("reset");
     }
 
     public void Highlight()
     {
         GetComponent<LineRenderer>().material = matDisabled;
-        Debug.Log("highlight");
     }
 }

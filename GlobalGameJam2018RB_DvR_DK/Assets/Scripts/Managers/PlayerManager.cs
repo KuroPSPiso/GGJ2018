@@ -51,6 +51,16 @@ public class PlayerManager : MonoBehaviour
                 pInput.controllersManager = ControllersManager;
                 pInput.ropeManager = ropeManager;
                 _playerGameObjects.Add(newPlayer);
+
+                if (i % 2 == 0)
+                {
+                    newPlayer.GetComponent<RopeLauncher>().enabled = false;
+                }
+                else
+                {
+                    newPlayer.GetComponent<HookSpawner>().enabled = false;
+                    newPlayer.GetComponent<PackageTransfer>().enabled = false;
+                }
             }
         }
     }

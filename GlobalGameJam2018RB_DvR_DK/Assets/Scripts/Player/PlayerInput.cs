@@ -24,7 +24,7 @@ public class PlayerInput : MonoBehaviour
 
     public bool IsJumping(bool mustRelease = false)
     {
-        return controllersManager.GetButton0(controllerId, mustRelease);
+        return controllersManager.GetButton1(controllerId, mustRelease);
     }
 
     public bool IsFiring()
