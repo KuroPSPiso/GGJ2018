@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matEnabled: {fileID: 2100000, guid: 5ac7f8f93fed0b24db82a2fcd978e7df, type: 2}
   matDisabled: {fileID: 2100000, guid: 5fdb07de6f43f0144ad00e2a6f55e24d, type: 2}
+  matCharged: {fileID: 2100000, guid: 5e0b92d84f8c6284c80907d2496fb4ce, type: 2}
 --- !u!120 &120642956506491702
 LineRenderer:
   m_ObjectHideFlags: 1

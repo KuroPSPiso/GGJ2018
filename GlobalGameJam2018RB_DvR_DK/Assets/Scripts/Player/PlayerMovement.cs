@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
                 jumped = true;
                 this._jumpCount += 1;
             }
-            _rigidbody2D.velocity = new Vector2(((jumped) ? pInput.GetMovement().x * this.forwardSpeed / (2/this._jumpCount) : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? this.jumpStrength : 0));
+            _rigidbody2D.velocity = new Vector2(((jumped) ? pInput.GetMovement().x * this.forwardSpeed / (2 / this._jumpCount) : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? this.jumpStrength : 0));
         }
 
 
@@ -64,7 +64,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            _rigidbody2D.velocity = new Vector2(pInput.GetMovement().x * this.forwardSpeed, _rigidbody2D.velocity.y);
+            if (!this._isWalled)
+            {
+                _rigidbody2D.velocity = new Vector2(pInput.GetMovement().x * this.forwardSpeed, _rigidbody2D.velocity.y);
+            }
         }
 
         //LookDirection
@@ -102,21 +105,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
-        if(coll.gameObject.layer == 10)
+        if (coll.gameObject.layer == 10)
         {
-            if(feet.transform.position.y < coll.transform.position.y)
+            if (feet.transform.position.y < coll.transform.position.y)
             {
                 this._isWalled = false;
 
                 bool willSkip = false;
-                for(int i = 0; i < _activeCollisionTrackers.Count; i++)
+                for (int i = 0; i < _activeCollisionTrackers.Count; i++)
                 {
                     if (willSkip)
                     {
                         continue;
                     }
 
-                    if(_activeCollisionTrackers[i].Key == coll)
+                    if (_activeCollisionTrackers[i].Key == coll)
                     {
                         StopCoroutine(_activeCollisionTrackers[i].Value);
                         willSkip = true;

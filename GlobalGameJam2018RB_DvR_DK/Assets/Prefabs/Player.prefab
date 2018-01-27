@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114123343255122646}
   - component: {fileID: 114109494175735002}
   - component: {fileID: 114181480694361256}
+  - component: {fileID: 114407252218738056}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -205,6 +206,7 @@ MonoBehaviour:
   maxRopes: 2
   gunObj: {fileID: 4729078823517130}
   rope: {fileID: 1663652319332102, guid: b0cacab2fa76e024a8ae0bc053cd6321, type: 2}
+  LaunchDirectionColor: {r: 1, g: 0.47843137, b: 0.47843137, a: 1}
 --- !u!114 &114144944178988060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,6 +234,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 2
+--- !u!114 &114407252218738056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1773361027967070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4f35d8871bb504998c14c33da47934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 2
+  loadTime: 3
+  beginCentre: {fileID: 0}
+  packet: {fileID: 0}
 --- !u!114 &114981628778223328
 MonoBehaviour:
   m_ObjectHideFlags: 1

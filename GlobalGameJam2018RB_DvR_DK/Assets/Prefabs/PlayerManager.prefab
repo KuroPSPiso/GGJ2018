@@ -110,10 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCount: 4
-  ControllersManager: {fileID: 114923863589471386, guid: 0fda7f4d7d47d3347bf60692137adb3c,
-    type: 2}
-  ropeManager: {fileID: 114991967534603328, guid: df918020415427246b65f43eb0f8f5b5,
-    type: 2}
+  ControllersManager: {fileID: 0}
+  ropeManager: {fileID: 0}
   PlayerGameObject: {fileID: 1773361027967070, guid: d81bbffa9e8ae03418ef7f70aa14df0b,
     type: 2}
   SkinGameObjects:
@@ -121,6 +119,12 @@ MonoBehaviour:
   - {fileID: 1188164495847474, guid: d89104ea91a7f9e439f658c645ff4706, type: 2}
   - {fileID: 1637822627120058, guid: 72adfcbb81a8b29469cbda320cae826c, type: 2}
   - {fileID: 1444979732828596, guid: 254b7b0831aa64143b068b8d04f9acfd, type: 2}
+  packages:
+  - {fileID: 1829986025684580, guid: 2d25d1f3f1a336843831857c0a64f7a4, type: 2}
+  - {fileID: 1910146234463432, guid: c28ae4d996e8f0f40b2b481f04e108e2, type: 2}
+  beginCentres:
+  - {fileID: 0}
+  - {fileID: 0}
   PlayerSpawns:
   - {fileID: 4701502920742412}
   - {fileID: 4992221075873520}
