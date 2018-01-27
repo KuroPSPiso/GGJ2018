@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
                 jumped = true;
                 this._jumpCount += 1;
             }
-            _rigidbody2D.velocity = new Vector2(((jumped) ? pInput.GetMovement().x * this.forwardSpeed / 2 : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? this.jumpStrength : 0));
+            _rigidbody2D.velocity = new Vector2(((jumped) ? pInput.GetMovement().x * this.forwardSpeed / (2/this._jumpCount) : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? this.jumpStrength : 0));
         }
 
 
@@ -57,6 +57,10 @@ public class PlayerMovement : MonoBehaviour
         if (this._isGrounded)
         {
             _rigidbody2D.velocity = new Vector2(pInput.GetMovement().x * this.forwardSpeed, _rigidbody2D.velocity.y + ((jumped) ? this.jumpStrength : 0));
+        }
+        else
+        {
+            _rigidbody2D.velocity = new Vector2(pInput.GetMovement().x * this.forwardSpeed, _rigidbody2D.velocity.y);
         }
 
         //LookDirection
