@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalGameJam2018RB_DvR_DK.CSharp", "GlobalGameJam2018RB_DvR_DK.CSharp.csproj", "{5C90B222-8DB5-C6C8-EBB0-9EE64F864552}"
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalGameJam2018RB_DvR_DK", "GlobalGameJam2018RB_DvR_DK.csproj", "{02796BE6-6F98-B831-D514-CD10996DBF74}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalGameJam2018RB_DvR_DK.CSharp.Plugins", "GlobalGameJam2018RB_DvR_DK.CSharp.Plugins.csproj", "{C1D592C5-4991-3070-095B-BB191364CCBE}"
 EndProject

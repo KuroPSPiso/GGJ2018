@@ -1,20 +1,17 @@
 fileFormatVersion: 2
-guid: 5cb87f4d38bf12d4fb6d0d01974c64c0
-timeCreated: 1517019977
+guid: 9f6b10dbff09a52448122581b701d02b
+timeCreated: 1517054981
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: blinn1
-    2100002: blinn2
-    2100004: lambert4
-    2100006: lambert2
-    2100008: lambert3
+    2100000: lambert15
+    2100002: lambert16
     2300000: //RootNode
     3300000: //RootNode
-    4300000: pCylinder11
+    4300000: pCube7
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -46,7 +43,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 10
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
