@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33274152526895288}
   - component: {fileID: 23448867611437766}
   - component: {fileID: 58028059453076198}
-  - component: {fileID: 114263366676385166}
+  - component: {fileID: 114987280549718348}
   m_Layer: 0
   m_Name: Hook
   m_TagString: Hook
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 1877335962554112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.42, y: -2.95, z: -0.6113281}
-  m_LocalScale: {x: 2.1027944, y: 2.1027944, z: 2.1027944}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4829246771324920}
   m_Father: {fileID: 0}
@@ -184,7 +184,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114263366676385166
+--- !u!114 &114987280549718348
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -192,9 +192,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1002833190071304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be5c3a05fdc1bd34689078b0fc7248d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 9432be66b1cd26641956f545298089b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 1
+  isConnected: 0
   matSelect: {fileID: 2100000, guid: 160df6ea22d50f74caf6513b7305efd7, type: 2}
   matDeselect: {fileID: 2100000, guid: 7fc553f69c7236744b6548c297d138e8, type: 2}
+  endPoint: {fileID: 4269252510046622}
+  packageType: 0

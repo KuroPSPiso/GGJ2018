@@ -48,7 +48,7 @@ public class Package : MonoBehaviour
             {
                 EndCentre endCentre = ropeTransfer.to as EndCentre;
 
-                if (endCentre)
+                if (endCentre && endCentre.packageType == packageType)
                     movingToEnd = endCentre;
                 else
                     inTransfer = false;

@@ -4,6 +4,7 @@ public class Hook : MonoBehaviour
 {
     //Parameters
     public bool isStatic = true;
+    [HideInInspector] public int isConnected = 0;
 
     public Material matSelect;
     public Material matDeselect;

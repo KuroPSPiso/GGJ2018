@@ -3,6 +3,7 @@
 public class EndCentre : Hook
 {
     public Transform endPoint;
+    public int packageType;
 
     public void IncreaseData()
     {

@@ -51,6 +51,7 @@ public class RopeLauncher : MonoBehaviour
             if (ropeShot)
             {
                 Destroy(ropeShot);
+                selectedHook.isConnected--;
 
                 selectedHook = null;
                 ropeShot = null;
@@ -109,6 +110,7 @@ public class RopeLauncher : MonoBehaviour
                         ropeShot = Instantiate(rope).GetComponent<LineRenderer>();
                         ropeShot.SetPosition(1, selectedHook.transform.position);
 
+                        selectedHook.isConnected++;
                         selectedHook.Deselect();
                     }
                 }
@@ -154,6 +156,7 @@ public class RopeLauncher : MonoBehaviour
                     //Remove shot rope
                     Destroy(ropeShot);
 
+                    selectedHook.isConnected--;
                     selectedHook = null;
                     ropeShot = null;
                 }
