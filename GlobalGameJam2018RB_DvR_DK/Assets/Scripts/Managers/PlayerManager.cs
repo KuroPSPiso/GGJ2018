@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject[] SkinGameObjects;
     public GameObject[] packages;
     public Transform[] beginCentres;
+    public Transform[] PlayerSpawns;
 
     private List<GameObject> _playerGameObjects = new List<GameObject>(4);
 
@@ -47,10 +48,17 @@ public class PlayerManager : MonoBehaviour
                 pInput.controllerId = i;
                 pInput.controllersManager = ControllersManager;
                 pInput.ropeManager = ropeManager;
-
                 _playerGameObjects.Add(newPlayer);
 
-                //Set abilities
+                if(i < 2)
+                {
+                    newPlayer.transform.position = PlayerSpawns[0].position;
+                }
+                else
+                {
+                    newPlayer.transform.position = PlayerSpawns[1].position;
+                }
+
                 if (i % 2 == 0)
                 {
                     newPlayer.GetComponent<RopeLauncher>().enabled = false;
