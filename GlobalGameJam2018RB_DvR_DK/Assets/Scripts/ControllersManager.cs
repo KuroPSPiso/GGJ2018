@@ -4,9 +4,18 @@ using XInputDotNetPure;
 
 public class ControllersManager : MonoBehaviour
 {
+    public enum ControllerMappingType
+    {
+        Plugin,
+        Both
+    }
+
     private const int MaxPlayerCount = 4;
     private ControllerControl[] _controllers;
     private Dictionary<int, bool> _playerReadyState = new Dictionary<int, bool>();
+
+    public ControllerMappingType MappingType = ControllerMappingType.Plugin;
+    private Dictionary<int, bool> _genericButtonDictionary = new Dictionary<int, bool>(9);
 
     public int PlayerCount
     {
@@ -83,25 +92,44 @@ public class ControllersManager : MonoBehaviour
         //Reset Player state
         for (int i = 0; i < MaxPlayerCount; i++)
         {
-            _playerReadyState.Add(i, false);
+            this._playerReadyState.Add(i, false);
+        }
+
+        //Reset Generic Button
+        for (int i = 0; i < 9; i++)
+        {
+            this._genericButtonDictionary.Add(i, false);
         }
     }
 
     private void GetControllers()
 	{
-		for (int i = 0; i < _controllers.Length; i++)
-		{
-			if (_controllers[i] == null && GamePad.GetState((PlayerIndex)i).IsConnected)
-			{
-				Debug.Log(string.Format("Player {0}  Connected", i));
+	    for (int i = 0; i < _controllers.Length; i++)
+	    {
+	        if (_controllers[i] == null && GamePad.GetState((PlayerIndex)i).IsConnected)
+	        {
+	            _controllers[i] = new ControllerControl
+	            {
+	                ControllerIndex = (PlayerIndex)i
+	            };
+	        }
+	    }
+    }
 
-				_controllers[i] = new ControllerControl
-				{
-					ControllerIndex = (PlayerIndex)i
-				};
-			}
-		}
-	}
+    private int GetIndexOfGenericController()
+    {
+        string[] joystickNames = Input.GetJoystickNames();
+
+        for (int i = 0; i < joystickNames.Length; i++)
+        {
+            if (joystickNames[i].ToLower().Contains("generic"))
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 
 	private void UpdateControllers()
 	{
@@ -116,6 +144,14 @@ public class ControllersManager : MonoBehaviour
 
     public Vector2 GetLeftAnalog(int controllerId)
     {
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            return new Vector2(
+                    Input.GetAxis(string.Format("Joy{0}LeftX", GetIndexOfGenericController() + 1)),
+                    Input.GetAxis(string.Format("Joy{0}LeftY", GetIndexOfGenericController() + 1))
+                );
+        }
+
         return new Vector2(
             _controllers[controllerId].State.ThumbSticks.Left.X,
             _controllers[controllerId].State.ThumbSticks.Left.Y
@@ -124,6 +160,14 @@ public class ControllersManager : MonoBehaviour
 
     public Vector2 GetRightAnalog(int controllerId)
     {
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            return new Vector2(
+                Input.GetAxis(string.Format("Joy{0}RightX", GetIndexOfGenericController() + 1)),
+                Input.GetAxis(string.Format("Joy{0}RightY", GetIndexOfGenericController() + 1))
+            );
+        }
+
         return new Vector2(
             _controllers[controllerId].State.ThumbSticks.Right.X,
             _controllers[controllerId].State.ThumbSticks.Right.Y
@@ -132,6 +176,12 @@ public class ControllersManager : MonoBehaviour
 
     public Vector2 GetHat(int controllerId, bool mustRelease = false)
     {
+
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            return new Vector2();
+        }
+
         float up = 0;
         float down = 0;
         float left = 0;
@@ -172,11 +222,21 @@ public class ControllersManager : MonoBehaviour
 
     public float GetLeftTrigger(int controllerId)
     {
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            return (Input.GetButton(string.Format("Joy{0}Button6", GetIndexOfGenericController() + 1)) ? 0f : 1f);
+        }
+
         return _controllers[controllerId].State.Triggers.Left;
     }
 
     public float GetRightTrigger(int controllerId)
     {
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            return (Input.GetButton(string.Format("Joy{0}Button7", GetIndexOfGenericController() + 1)) ? 0f : 1f);
+        }
+
         return _controllers[controllerId].State.Triggers.Right;
     }
 
@@ -185,6 +245,28 @@ public class ControllersManager : MonoBehaviour
     /// </summary>
     public bool GetButton0(int controllerId, bool mustRelease = false)
     {
+
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            bool newState = Input.GetButton(string.Format("Joy{0}Button1", GetIndexOfGenericController() + 1));
+            bool oldState = this._genericButtonDictionary[1];
+
+            if (!mustRelease)
+            {
+                this._genericButtonDictionary[1] = newState;
+                return newState;
+            }
+
+            if (oldState == false && newState == true)
+            {
+                this._genericButtonDictionary[1] = newState;
+                return true;
+            }
+
+            this._genericButtonDictionary[1] = newState;
+            return false;
+        }
+
         if (!mustRelease)
         {
             return _controllers[controllerId].State.Buttons.B == ButtonState.Pressed;
@@ -198,6 +280,28 @@ public class ControllersManager : MonoBehaviour
     /// </summary>
     public bool GetButton1(int controllerId, bool mustRelease = false)
     {
+
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            bool newState = Input.GetButton(string.Format("Joy{0}Button2", GetIndexOfGenericController() + 1));
+            bool oldState = this._genericButtonDictionary[2];
+
+            if (!mustRelease)
+            {
+                this._genericButtonDictionary[2] = newState;
+                return newState;
+            }
+
+            if (oldState == false && newState == true)
+            {
+                this._genericButtonDictionary[2] = newState;
+                return true;
+            }
+
+            this._genericButtonDictionary[2] = newState;
+            return false;
+        }
+
         if (!mustRelease)
         {
             return _controllers[controllerId].State.Buttons.A == ButtonState.Pressed;
@@ -211,6 +315,28 @@ public class ControllersManager : MonoBehaviour
     /// </summary>
     public bool GetButton2(int controllerId, bool mustRelease = false)
     {
+
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            bool newState = Input.GetButton(string.Format("Joy{0}Button3", GetIndexOfGenericController() + 1));
+            bool oldState = this._genericButtonDictionary[3];
+
+            if (!mustRelease)
+            {
+                this._genericButtonDictionary[3] = newState;
+                return newState;
+            }
+
+            if (oldState == false && newState == true)
+            {
+                this._genericButtonDictionary[3] = newState;
+                return true;
+            }
+
+            this._genericButtonDictionary[3] = newState;
+            return false;
+        }
+
         if (!mustRelease)
         {
             return _controllers[controllerId].State.Buttons.X == ButtonState.Pressed;
@@ -224,6 +350,28 @@ public class ControllersManager : MonoBehaviour
     /// </summary>
     public bool GetButton3(int controllerId, bool mustRelease = false)
     {
+
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            bool newState = Input.GetButton(string.Format("Joy{0}Button0", GetIndexOfGenericController() + 1));
+            bool oldState = this._genericButtonDictionary[0];
+
+            if (!mustRelease)
+            {
+                this._genericButtonDictionary[0] = newState;
+                return newState;
+            }
+
+            if (oldState == false && newState == true)
+            {
+                this._genericButtonDictionary[0] = newState;
+                return true;
+            }
+
+            this._genericButtonDictionary[0] = newState;
+            return false;
+        }
+
         if (!mustRelease)
         {
             return _controllers[controllerId].State.Buttons.Y == ButtonState.Pressed;
@@ -235,6 +383,28 @@ public class ControllersManager : MonoBehaviour
 
     public bool GetButtonLeft(int controllerId, bool mustRelease = false)
     {
+
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            bool newState = Input.GetButton(string.Format("Joy{0}Button4", GetIndexOfGenericController() + 1));
+            bool oldState = this._genericButtonDictionary[4];
+
+            if (!mustRelease)
+            {
+                this._genericButtonDictionary[4] = newState;
+                return newState;
+            }
+
+            if (oldState == false && newState == true)
+            {
+                this._genericButtonDictionary[4] = newState;
+                return true;
+            }
+
+            this._genericButtonDictionary[4] = newState;
+            return false;
+        }
+
         if (!mustRelease)
         {
             return _controllers[controllerId].State.Buttons.LeftShoulder == ButtonState.Pressed;
@@ -246,6 +416,28 @@ public class ControllersManager : MonoBehaviour
 
     public bool GetButtonRight(int controllerId, bool mustRelease = false)
     {
+
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            bool newState = Input.GetButton(string.Format("Joy{0}Button5", GetIndexOfGenericController() + 1));
+            bool oldState = this._genericButtonDictionary[2];
+
+            if (!mustRelease)
+            {
+                this._genericButtonDictionary[5] = newState;
+                return newState;
+            }
+
+            if (oldState == false && newState == true)
+            {
+                this._genericButtonDictionary[5] = newState;
+                return true;
+            }
+
+            this._genericButtonDictionary[5] = newState;
+            return false;
+        }
+
         if (!mustRelease)
         {
             return _controllers[controllerId].State.Buttons.RightShoulder == ButtonState.Pressed;
@@ -257,6 +449,30 @@ public class ControllersManager : MonoBehaviour
 
     public bool GetButtonStart(int controllerId, bool mustRelease = false)
     {
+
+
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            bool newState = Input.GetButton(string.Format("Joy{0}Button9", GetIndexOfGenericController() + 1));
+            bool oldState = this._genericButtonDictionary[2];
+
+            if (!mustRelease)
+            {
+                this._genericButtonDictionary[9] = newState;
+                return newState;
+            }
+
+            if (oldState == false && newState == true)
+            {
+                this._genericButtonDictionary[9] = newState;
+                return true;
+            }
+
+            this._genericButtonDictionary[9] = newState;
+            return false;
+        }
+
+
         if (!mustRelease)
         {
             return _controllers[controllerId].State.Buttons.Start == ButtonState.Pressed;
@@ -270,6 +486,28 @@ public class ControllersManager : MonoBehaviour
     /// </summary>
     public bool GetButtonAltStart(int controllerId, bool mustRelease = false)
     {
+
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            bool newState = Input.GetButton(string.Format("Joy{0}Button8", GetIndexOfGenericController() + 1));
+            bool oldState = this._genericButtonDictionary[8];
+
+            if (!mustRelease)
+            {
+                this._genericButtonDictionary[8] = newState;
+                return newState;
+            }
+
+            if (oldState == false && newState == true)
+            {
+                this._genericButtonDictionary[8] = newState;
+                return true;
+            }
+
+            this._genericButtonDictionary[8] = newState;
+            return false;
+        }
+
         if (!mustRelease)
         {
             return _controllers[controllerId].State.Buttons.Back == ButtonState.Pressed;
@@ -284,6 +522,8 @@ public class ControllersManager : MonoBehaviour
     /// </summary>
     public bool GetButtonHome(int controllerId, bool mustRelease = false)
     {
+        return false;
+
         if (!mustRelease)
         {
             return _controllers[controllerId].State.Buttons.Guide == ButtonState.Pressed;
@@ -295,6 +535,11 @@ public class ControllersManager : MonoBehaviour
 
     public bool IsControllerActive(int controllerId)
     {
+        if (MappingType == ControllerMappingType.Both && controllerId == 3)
+        {
+            return GetIndexOfGenericController() != -1;
+        }
+
         return _controllers[controllerId] != null;
     }
 }
