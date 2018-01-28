@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpStrength;
     public float forwardSpeed;
     public Transform feet;
+    public GameObject trap;
+    public float stunTime = 2.0f;
 
     //Private members
     private const int JumpCountLimit = 2;
@@ -17,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _isWalled = false;
     private Transform _lastWallHit = null;
     private int _jumpCount = 0;
+    private float stunned = 0.0f;
 
     PlayerInput pInput;
 
@@ -32,6 +35,16 @@ public class PlayerMovement : MonoBehaviour
         if (!pInput.IsActive())
             return;
 
+        float hSpeed = this.forwardSpeed;
+        float jStrength = this.jumpStrength;
+
+        if (stunned > 0.0f)
+        {
+            stunned -= Time.deltaTime;
+            hSpeed = 0;
+            jStrength = 0;
+        }
+
         //Jump
         bool jumped = false;
 
@@ -43,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
                 jumped = true;
                 this._jumpCount += 1;
                 jumpOffDirection = (this._lastWallHit.position.x > this.transform.position.x) ? -1f : 1f;
-                _rigidbody2D.velocity = new Vector2(((jumped) ? jumpOffDirection * this.forwardSpeed / 2 : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? this.jumpStrength : 0));
+                _rigidbody2D.velocity = new Vector2(((jumped) ? jumpOffDirection * hSpeed / 2 : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? jStrength : 0));
             }
         }
         else if (this._isGrounded || this._jumpCount < JumpCountLimit - 1)
@@ -54,21 +67,28 @@ public class PlayerMovement : MonoBehaviour
                 this._jumpCount += 1;
                 AudioManager.PlayerJumped();
             }
-            _rigidbody2D.velocity = new Vector2(((jumped) ? pInput.GetMovement().x * this.forwardSpeed / (2 / this._jumpCount) : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? this.jumpStrength : 0));
+            _rigidbody2D.velocity = new Vector2(((jumped) ? pInput.GetMovement().x * hSpeed / (2 / this._jumpCount) : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? jStrength : 0));
         }
 
 
         //Walk
         if (this._isGrounded)
         {
-            _rigidbody2D.velocity = new Vector2(pInput.GetMovement().x * this.forwardSpeed, _rigidbody2D.velocity.y + ((jumped) ? this.jumpStrength : 0));
+            _rigidbody2D.velocity = new Vector2(pInput.GetMovement().x * hSpeed, _rigidbody2D.velocity.y + ((jumped) ? jStrength : 0));
         }
         else
         {
             if (!this._isWalled)
             {
-                _rigidbody2D.velocity = new Vector2(pInput.GetMovement().x * this.forwardSpeed, _rigidbody2D.velocity.y);
+                _rigidbody2D.velocity = new Vector2(pInput.GetMovement().x * hSpeed, _rigidbody2D.velocity.y);
             }
+        }
+
+        //Trapping
+        if (pInput.IsTrapping(true))
+        {
+            LiftOffTrap t = Instantiate(trap, transform.position, Quaternion.identity).GetComponent<LiftOffTrap>();
+            t.team = pInput.team;
         }
 
         //LookDirection
@@ -99,6 +119,22 @@ public class PlayerMovement : MonoBehaviour
             this._isWalled = true;
             this._jumpCount = 0;
             this._lastWallHit = coll.gameObject.transform;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Trap")
+        {
+            LiftOffTrap trap = collision.GetComponent<LiftOffTrap>();
+
+            if(trap.team != pInput.team)
+            {
+                if(stunned <= 0.0f)
+                    stunned = stunTime;
+                
+                Destroy(trap.gameObject);
+            }
         }
     }
 

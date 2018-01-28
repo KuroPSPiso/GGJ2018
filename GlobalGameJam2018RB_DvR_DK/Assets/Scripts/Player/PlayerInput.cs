@@ -28,6 +28,11 @@ public class PlayerInput : MonoBehaviour
         return controllersManager.GetButton1(controllerId, mustRelease);
     }
 
+    public bool IsTrapping(bool mustRelease = false)
+    {
+        return controllersManager.GetButton2(controllerId, mustRelease);
+    }
+
     public bool IsFiring()
     {
         return controllersManager.GetRightTrigger(controllerId) > 0.25f;

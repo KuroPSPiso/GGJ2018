@@ -70,8 +70,8 @@ public class RopeLauncher : MonoBehaviour
 
                 if (hookObj)
                 {
-                    Vector3 delta = hookObj.transform.position - gunObj.position;
-                    float angle = Mathf.Atan2(delta.y, delta.x) * 180 / Mathf.PI;
+                    //Vector3 delta = hookObj.transform.position - gunObj.position;
+                    //float angle = Mathf.Atan2(delta.y, delta.x) * 180 / Mathf.PI;
                     Hook hookCmp = hookObj.GetComponent<Hook>();
 
                     //Rotate gun

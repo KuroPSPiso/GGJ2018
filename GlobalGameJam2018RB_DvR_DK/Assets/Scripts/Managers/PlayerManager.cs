@@ -21,14 +21,14 @@ public class PlayerManager : MonoBehaviour
         SpawnPlayers();
 
         //Disable collision between players
-        for (int i = 0; i < _playerGameObjects.Count; i++)
+        /*for (int i = 0; i < _playerGameObjects.Count; i++)
         {
             for (int j = 0; j < _playerGameObjects.Count; j++)
             {
                 if (i != j)
                     Physics2D.IgnoreCollision(_playerGameObjects[i].GetComponent<BoxCollider2D>(), _playerGameObjects[j].GetComponent<BoxCollider2D>());
             }
-        }
+        }*/
     }
 
     void SpawnPlayers()
@@ -38,7 +38,7 @@ public class PlayerManager : MonoBehaviour
             if (SkinGameObjects.Length >= i + 1)
             {
                 GameObject newPlayer = GameObject.Instantiate(PlayerGameObject);
-                GameObject newSkin = GameObject.Instantiate(SkinGameObjects[i], newPlayer.transform.GetChild(0));
+                GameObject.Instantiate(SkinGameObjects[i], newPlayer.transform.GetChild(0));
 
                 PlayerInput pInput = newPlayer.GetComponent<PlayerInput>();
                 pInput.controllerId = i;
