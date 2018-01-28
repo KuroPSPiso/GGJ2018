@@ -35,7 +35,8 @@ public class HookSpawner : MonoBehaviour
                 if (!pInput.ropeManager.IsHookConnected(hookScr) && hookScr.isConnected == 0)
                 {
                     Destroy(hookObj.transform.parent.gameObject);
-                    nHooks++;
+AudioManager.HookRemoved();                    
+nHooks++;
                 }
             }
             else
@@ -44,6 +45,7 @@ public class HookSpawner : MonoBehaviour
                 {
                     Hook hookScr = Instantiate(hook, gunObj.transform.position, Quaternion.identity).GetComponentInChildren<Hook>();
                     hookScr.isStatic = false;
+                    AudioManager.HookCreated();
                     nHooks--;
                 }
             }
@@ -51,7 +53,9 @@ public class HookSpawner : MonoBehaviour
         else if (isFiring)
         {
             if (!pInput.IsFiring())
+            {
                 isFiring = false;
+            }
         }
     }
 

@@ -101,6 +101,7 @@ public class RopeLauncher : MonoBehaviour
                     if (pInput.ropeManager.TrimRopes(pInput, maxRopes))
                     {
                         ropeEnabled = true;
+                        AudioManager.GunFired();
 
                         ropeShot = Instantiate(rope).GetComponent<LineRenderer>();
                         shootTime = 0.6f;
