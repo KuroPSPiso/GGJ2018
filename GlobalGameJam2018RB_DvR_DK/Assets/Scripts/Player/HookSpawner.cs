@@ -34,9 +34,9 @@ public class HookSpawner : MonoBehaviour
 
                 if (!pInput.ropeManager.IsHookConnected(hookScr) && hookScr.isConnected == 0)
                 {
-                    Destroy(hookObj);
-                    AudioManager.HookRemoved();
-                    nHooks++;
+                    Destroy(hookObj.transform.parent.gameObject);
+AudioManager.HookRemoved();                    
+nHooks++;
                 }
             }
             else

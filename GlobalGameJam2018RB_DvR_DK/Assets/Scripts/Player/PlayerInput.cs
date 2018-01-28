@@ -35,7 +35,7 @@ public class PlayerInput : MonoBehaviour
 
     public bool IsTrapping(bool mustRelease = false)
     {
-        return controllersManager.GetButton2(controllerId, mustRelease);
+        return controllersManager.GetButton0(controllerId, mustRelease);
     }
 
     public bool IsFiring()

@@ -177,7 +177,7 @@ public class RopeLauncher : MonoBehaviour
         lineRenderer.SetPositions(new Vector3[]
         {
             gunObj.position,
-            gunObj.position + new Vector3(x, y, 0) * 1
+            gunObj.position + new Vector3(x, y, 0) * 1.5f
         });
         lineRenderer.startColor = LaunchDirectionColor;
         Color c = LaunchDirectionColor;

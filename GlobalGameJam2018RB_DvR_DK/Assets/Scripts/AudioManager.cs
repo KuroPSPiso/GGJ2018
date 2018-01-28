@@ -40,6 +40,7 @@ public class AudioManager : MonoBehaviour
 
     //Player
     public AudioClip[] SFX_Player_Jumping;
+    public AudioClip[] SFX_Player_Stunned;
     public AudioClip[] SFX_Gun_Firing;
 
     private AudioClip _music;
@@ -90,6 +91,15 @@ public class AudioManager : MonoBehaviour
 
         AudioClip audioClip =
             audioManager.SFX_Gun_Firing[Random.Range(0, audioManager.SFX_Gun_Firing.Length)];
+        audioManager.SfxAudioSource.PlayOneShot(audioClip);
+    }
+
+    public static void PlayerStunned()
+    {
+        AudioManager audioManager = GetAudioManager();
+
+        AudioClip audioClip =
+            audioManager.SFX_Player_Stunned[Random.Range(0, audioManager.SFX_Player_Stunned.Length)];
         audioManager.SfxAudioSource.PlayOneShot(audioClip);
     }
 
