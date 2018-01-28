@@ -79,7 +79,7 @@ public class PackageTransfer : MonoBehaviour
                 rope.inTransfer++;
 
                 if(rope.inTransfer == 1)
-                    rope.lineRenderer.GetComponent<RopeColor>().Highlight();
+                    rope.lineRenderer.GetComponent<RopeColor>().Transfer();
 
                 return true;
             }
