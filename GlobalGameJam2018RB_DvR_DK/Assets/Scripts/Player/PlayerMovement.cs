@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 jumped = true;
                 this._jumpCount += 1;
+                AudioManager.PlayerJumped();
             }
             _rigidbody2D.velocity = new Vector2(((jumped) ? pInput.GetMovement().x * this.forwardSpeed / (2 / this._jumpCount) : this._rigidbody2D.velocity.x), _rigidbody2D.velocity.y + ((jumped) ? this.jumpStrength : 0));
         }

@@ -7,6 +7,7 @@ TagManager:
   - Hook
   - Package
   - Terminal
+  - AudioManager
   layers:
   - Default
   - TransparentFX
