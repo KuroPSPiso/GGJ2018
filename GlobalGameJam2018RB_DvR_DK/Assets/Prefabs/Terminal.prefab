@@ -20,12 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4380898854920270}
   - component: {fileID: 33413193746954172}
-  - component: {fileID: 65121025616516262}
   - component: {fileID: 23996390683375058}
+  - component: {fileID: 95870678986783768}
   - component: {fileID: 114695869186073616}
   m_Layer: 0
   m_Name: Terminal
-  m_TagString: Terminal
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,9 +36,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1702512467308712}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.02, y: -2.89, z: -0.6113281}
-  m_LocalScale: {x: 2.1027944, y: 2.1027944, z: 2.1027944}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.000062329, y: 3.016, z: 0.054895}
+  m_LocalScale: {x: 5.2802615, y: 5.280267, z: 5.280267}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -57,7 +57,17 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bd09d9c823ef2fe4881b94eb53f63173, type: 3}
+  - {fileID: 2100002, guid: bd09d9c823ef2fe4881b94eb53f63173, type: 3}
+  - {fileID: 2100004, guid: bd09d9c823ef2fe4881b94eb53f63173, type: 3}
+  - {fileID: 2100006, guid: bd09d9c823ef2fe4881b94eb53f63173, type: 3}
+  - {fileID: 2100008, guid: bd09d9c823ef2fe4881b94eb53f63173, type: 3}
+  - {fileID: 2100010, guid: bd09d9c823ef2fe4881b94eb53f63173, type: 3}
+  - {fileID: 2100012, guid: bd09d9c823ef2fe4881b94eb53f63173, type: 3}
+  - {fileID: 2100014, guid: bd09d9c823ef2fe4881b94eb53f63173, type: 3}
+  - {fileID: 2100016, guid: bd09d9c823ef2fe4881b94eb53f63173, type: 3}
+  - {fileID: 2100018, guid: bd09d9c823ef2fe4881b94eb53f63173, type: 3}
+  - {fileID: 2100020, guid: bd09d9c823ef2fe4881b94eb53f63173, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -65,7 +75,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
+  m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
@@ -83,19 +93,24 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1702512467308712}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65121025616516262
-BoxCollider:
+  m_Mesh: {fileID: 4300000, guid: bd09d9c823ef2fe4881b94eb53f63173, type: 3}
+--- !u!95 &95870678986783768
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1702512467308712}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Avatar: {fileID: 9000000, guid: bd09d9c823ef2fe4881b94eb53f63173, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114695869186073616
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nHooks: 3
   gunObj: {fileID: 4729078823517130}
-  hook: {fileID: 1860327969906334, guid: ce1121a8f13123d42ace9610f64b8ffe, type: 2}
+  hook: {fileID: 1631467304382350, guid: e2401a4f5767f1f468df45b963de9eb8, type: 2}
 --- !u!114 &114123343255122646
 MonoBehaviour:
   m_ObjectHideFlags: 1
