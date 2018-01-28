@@ -313,6 +313,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 18f8d1ed6bfc8c64d9b8d79c987dd4eb, type: 3}
   - {fileID: 8300000, guid: fb795fbc203024f47a54ce99daf4fe2c, type: 3}
   - {fileID: 8300000, guid: 1826f32d3f2b2b54889770017c803c2b, type: 3}
+  SFX_Player_Stunned:
+  - {fileID: 8300000, guid: 8cfa1a4768242c6468cf43bc5d221492, type: 3}
   SFX_Gun_Firing:
   - {fileID: 8300000, guid: bdfaab1cec0d86347a00a884d97e746a, type: 3}
   - {fileID: 8300000, guid: 24a82cbf1a73e384fb537d2e123fd3fa, type: 3}

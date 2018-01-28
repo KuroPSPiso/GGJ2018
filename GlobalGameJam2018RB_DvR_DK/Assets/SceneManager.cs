@@ -81,4 +81,10 @@ public class SceneManager : MonoBehaviour
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(NextScene);
     }
+
+    public static IEnumerator SwitchSceneDelayed(int seconds, int nextScene)
+    {
+        yield return new WaitForSeconds(seconds);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
+    }
 }

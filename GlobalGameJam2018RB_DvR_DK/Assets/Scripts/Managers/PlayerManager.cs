@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     public Transform[] PlayerSpawns;
 
     private List<GameObject> _playerGameObjects = new List<GameObject>(4);
+    public WinCamera winCamera;
 
     void Start()
     {
@@ -29,6 +31,26 @@ public class PlayerManager : MonoBehaviour
                     Physics2D.IgnoreCollision(_playerGameObjects[i].GetComponent<BoxCollider2D>(), _playerGameObjects[j].GetComponent<BoxCollider2D>());
             }
         }*/
+    }
+
+    public void GotoWin(int team)
+    {
+        foreach (GameObject player in _playerGameObjects)
+        {
+            PlayerInput pInput = player.GetComponent<PlayerInput>();
+            pInput.disableInput = true;
+
+            if (pInput.team == team)
+            {
+                winCamera.cameraPos.Add(pInput.transform.position - Vector3.forward * 5.0f);
+                player.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Win");
+            }
+        }
+
+        winCamera.GetComponent<PostProcessingBehaviour>().enabled = false;
+        winCamera.SetWinLabel(team);
+
+        StartCoroutine(SceneManager.SwitchSceneDelayed(10, 0));
     }
 
     void SpawnPlayers()

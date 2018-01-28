@@ -8,8 +8,13 @@ public class PlayerInput : MonoBehaviour
     public RopeManager ropeManager;
     public int team;
 
+    public bool disableInput = false;
+
     public bool IsActive()
     {
+        if (disableInput)
+            return false;
+
         return controllersManager.IsControllerActive(controllerId);
     }
 
