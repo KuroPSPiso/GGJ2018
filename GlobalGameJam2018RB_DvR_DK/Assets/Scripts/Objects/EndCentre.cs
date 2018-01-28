@@ -28,5 +28,6 @@ public class EndCentre : Hook
     public void IncreaseData()
     {
 		score += 1.0f / maxScore; 
+        AudioManager.TankFilled();
     }
 }

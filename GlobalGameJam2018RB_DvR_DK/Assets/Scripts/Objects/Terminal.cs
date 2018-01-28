@@ -79,6 +79,7 @@ public class Terminal : MonoBehaviour
     public void StartLoading(int team)
     {
         Debug.Log("start loading " + team);
+        AudioManager.ButttonActivate();
 
         _greenTeamLoading = team == 0;
         _blueTeamLoading = team == 1;
@@ -106,6 +107,7 @@ public class Terminal : MonoBehaviour
     public void StopLoading(int team)
     {
         Debug.Log("stop loading " + team);
+        AudioManager.ButttonDeactivate();
         if (team == 0)
         {
             StopCoroutine(_greenTeamLoadingCoroutine);
@@ -127,6 +129,7 @@ public class Terminal : MonoBehaviour
     public void FinishLoading(int team)
     {
         Debug.Log("finish loading " + team);
+        AudioManager.TerminalFinished();
         if (team == 0)
         {
             StopCoroutine(_greenTeamLoadingCoroutine);
