@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: b341e08859faeff4181ddb64c0f5d6ee
+timeCreated: 1517140621
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: SF Slapstick Comic Shaded
+  fontNames:
+  - SF Slapstick Comic Shaded
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
