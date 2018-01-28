@@ -130,8 +130,11 @@ public class PlayerMovement : MonoBehaviour
 
             if(trap.team != pInput.team)
             {
-                if(stunned <= 0.0f)
+                if (stunned <= 0.0f)
+                {
                     stunned = stunTime;
+                    AudioManager.PlayerStunned();
+                }
                 
                 Destroy(trap.gameObject);
             }
