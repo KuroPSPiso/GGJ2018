@@ -9,9 +9,14 @@ ModelImporter:
     2100002: lambert25
     2100004: lambert27
     2100006: Light_Green
+    2100008: Black
+    2100010: Light_Blue
+    2100012: InsideTank
+    2100014: Dark_Blue
     2300000: //RootNode
     3300000: //RootNode
     4300000: polySurface8
+    4300002: polySurface16
     9500000: //RootNode
   externalObjects: {}
   materials:
