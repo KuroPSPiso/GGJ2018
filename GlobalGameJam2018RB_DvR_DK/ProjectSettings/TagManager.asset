@@ -4,14 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Hook
-  - Package
-  - Terminal
-<<<<<<< HEAD
-  - AudioManager
-=======
   - Trap
->>>>>>> origin/master
+  - AudioManager
+  - Hook
   layers:
   - Default
   - TransparentFX
@@ -21,9 +16,6 @@ TagManager:
   - UI
   - 
   - 
-  - Ground
-  - Wall
-  - FollowablePlatform
   - 
   - 
   - 
@@ -44,7 +36,10 @@ TagManager:
   - 
   - 
   - 
-  - NoPhysics
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
