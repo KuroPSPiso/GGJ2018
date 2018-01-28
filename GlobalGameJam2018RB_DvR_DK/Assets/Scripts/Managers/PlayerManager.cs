@@ -68,8 +68,8 @@ public class PlayerManager : MonoBehaviour
                 }
 
                 TerminalInteract tInteract = newPlayer.GetComponent<TerminalInteract>();
-                tInteract.beginCentre = beginCentres[(i - 1) / 2];
-                tInteract.packet = packages[(i - 1) / 2];
+                tInteract.beginCentre = beginCentres[i < 2 ? 0 : 1];
+                tInteract.packet = packages[i < 2 ? 0 : 1];
             }
         }
     }

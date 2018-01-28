@@ -34,7 +34,7 @@ public class HookSpawner : MonoBehaviour
 
                 if (!pInput.ropeManager.IsHookConnected(hookScr) && hookScr.isConnected == 0)
                 {
-                    Destroy(hookObj);
+                    Destroy(hookObj.transform.parent.gameObject);
                     nHooks++;
                 }
             }
