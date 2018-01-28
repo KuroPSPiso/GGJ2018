@@ -13,6 +13,7 @@ public class Package : MonoBehaviour
     public bool inTransfer = true;
     public RopeManager.Rope ropeTransfer;
     EndCentre movingToEnd;
+    public Terminal terminal;
     
     public int packageType;
 
@@ -32,7 +33,10 @@ public class Package : MonoBehaviour
             if (movingToEnd)
             {
                 if (movingToEndTime <= 0.0f)
+                {
+                    terminal.RemovePackage(packageType);
                     Destroy(gameObject);
+                }
                 else
                 {
                     movingToEndTime -= Time.deltaTime;
@@ -54,6 +58,10 @@ public class Package : MonoBehaviour
                     inTransfer = false;
 
                 ropeTransfer.inTransfer--;
+
+                if (ropeTransfer.inTransfer == 0)
+                    ropeTransfer.lineRenderer.GetComponent<RopeColor>().ResetColor();
+
                 ropeTransfer = null;
             }
         }
