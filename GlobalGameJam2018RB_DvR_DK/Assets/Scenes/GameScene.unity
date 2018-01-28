@@ -301,7 +301,7 @@ GameObject:
   m_PrefabParentObject: {fileID: 1827931082765650, guid: 82ad1aac67d4b3e4b81ff51624a8ffec,
     type: 2}
   m_PrefabInternal: {fileID: 1622046123}
---- !u!58 &90256754
+--- !u!58 &90256758
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -321,7 +321,7 @@ GameObject:
   m_PrefabParentObject: {fileID: 1581532593109916, guid: a20060cf975ed584ab6ed234dd8f4bff,
     type: 2}
   m_PrefabInternal: {fileID: 1840187479}
---- !u!58 &91544155
+--- !u!58 &91544159
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -406,21 +406,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1694502358425800, guid: ffa1aa641aa0e8e4b96360b43968d70b,
     type: 2}
   m_PrefabInternal: {fileID: 1156821492}
---- !u!58 &119710323
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 119710322}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.17
 --- !u!114 &119710326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,6 +421,21 @@ MonoBehaviour:
   isConnected: 0
   matSelect: {fileID: 2100000, guid: 160df6ea22d50f74caf6513b7305efd7, type: 2}
   matDeselect: {fileID: 2100000, guid: 690ce01aae8930f46b6e7b6e56d522af, type: 2}
+--- !u!58 &119710327
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 119710322}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.17
 --- !u!1 &151752177 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1968925363347988, guid: ae4a68781e85c9e4893012bde7d2d405,
@@ -1478,9 +1478,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 1702512467308712, guid: c703e77e3d3c3d145b8b275b36be6e0e, type: 2}
-      propertyPath: m_TagString
-      value: Terminal
+    - target: {fileID: 4201998567481722, guid: c703e77e3d3c3d145b8b275b36be6e0e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c703e77e3d3c3d145b8b275b36be6e0e, type: 2}
@@ -5018,7 +5018,7 @@ GameObject:
   m_PrefabParentObject: {fileID: 1862676585759626, guid: 2e1eaf9baffca7543a5a174cc82b4af9,
     type: 2}
   m_PrefabInternal: {fileID: 2017174193}
---- !u!58 &1835000972
+--- !u!58 &1835000976
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
