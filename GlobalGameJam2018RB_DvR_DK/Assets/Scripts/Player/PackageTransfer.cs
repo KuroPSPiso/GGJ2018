@@ -74,6 +74,9 @@ public class PackageTransfer : MonoBehaviour
 
             if (package.ropeTransfer == null && package.hookedTo == rope.from.transform)
             {
+                rope.from.isConnected--;
+                rope.to.isConnected++;
+
                 package.hookedTo = rope.to.transform;
                 package.ropeTransfer = rope;
                 rope.inTransfer++;
@@ -81,7 +84,6 @@ public class PackageTransfer : MonoBehaviour
                 if (rope.inTransfer == 1)
                 {
                     rope.lineRenderer.GetComponent<RopeColor>().Transfer();
-
                     AudioManager.GunFired();
                 }
 

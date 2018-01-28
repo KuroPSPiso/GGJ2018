@@ -225,7 +225,7 @@ MonoBehaviour:
   packageType: 1
   tankFill: {fileID: 1126097255}
   playerManager: {fileID: 270099748}
-  maxScore: 5
+  maxScore: 2
 --- !u!1 &90256753
 GameObject:
   m_ObjectHideFlags: 0
@@ -8574,7 +8574,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -31425943
+  randomSeed: 728796928
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -18172,7 +18172,7 @@ MonoBehaviour:
   packageType: 0
   tankFill: {fileID: 1620648518}
   playerManager: {fileID: 270099748}
-  maxScore: 5
+  maxScore: 2
 --- !u!1 &1992151742
 GameObject:
   m_ObjectHideFlags: 0

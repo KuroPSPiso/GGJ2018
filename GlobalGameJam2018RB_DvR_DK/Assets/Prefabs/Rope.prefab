@@ -55,6 +55,7 @@ MonoBehaviour:
   matEnabled: {fileID: 2100000, guid: 5ac7f8f93fed0b24db82a2fcd978e7df, type: 2}
   matDisabled: {fileID: 2100000, guid: 5fdb07de6f43f0144ad00e2a6f55e24d, type: 2}
   matCharged: {fileID: 2100000, guid: 5e0b92d84f8c6284c80907d2496fb4ce, type: 2}
+  inTransfer: 0
 --- !u!120 &120642956506491702
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -100,7 +101,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 0.7499962
+        value: 0.4935875
         inSlope: 0
         outSlope: 0
         tangentMode: 0
