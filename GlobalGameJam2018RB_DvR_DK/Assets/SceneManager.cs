@@ -16,6 +16,11 @@ public class SceneManager : MonoBehaviour
 
     // Update is called once per frame
     void Update () {
+        if(_playingVideo)
+            return;
+
+        bool canStart = true;
+
         for (int i = 0; i < 4; i++)
         {
             string sState = "Not Ready";
@@ -27,14 +32,33 @@ public class SceneManager : MonoBehaviour
                     if (state)
                     {
                         sState = "Ready";
+                        if(state == false)
+                        {
+                            canStart = state;
+                        }
                     }
+                    else
+                    {
+                        canStart = false;
+                    }
+                }
+                else
+                {
+                    canStart = false;
                 }
                 TextPlayerReadyState[i].text = sState;
             }
+            else
+            {
+                canStart = false;
+            }
         }
 
-        _playingVideo = true;
-        StartCoroutine(SwitchScene());
+        if (canStart)
+        {
+            _playingVideo = true;
+            StartCoroutine(SwitchScene());
+        }
     }
 
     IEnumerator SwitchScene()
@@ -45,7 +69,6 @@ public class SceneManager : MonoBehaviour
             _playingVideo = false;
         }
 
-        UnityEngine.SceneManagement.SceneManager.SetActiveScene(
-            UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(NextScene));
+        UnityEngine.SceneManagement.SceneManager.LoadScene(NextScene);
     }
 }

@@ -38,7 +38,7 @@ public class PlayerManager : MonoBehaviour
             if (SkinGameObjects.Length >= i + 1)
             {
                 GameObject newPlayer = GameObject.Instantiate(PlayerGameObject);
-                GameObject newSkin = GameObject.Instantiate(SkinGameObjects[i], newPlayer.transform.GetChild(0));
+                GameObject.Instantiate(SkinGameObjects[i], newPlayer.transform.GetChild(0));
 
                 PlayerInput pInput = newPlayer.GetComponent<PlayerInput>();
                 pInput.controllerId = i;
