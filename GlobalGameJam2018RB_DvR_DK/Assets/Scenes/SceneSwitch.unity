@@ -1182,7 +1182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c9ffcc4076fcfe48af040a7a663b5f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextScene: 1
+  NextScene: 2
   ControllersManagerInstance: {fileID: 2079996297}
   TextPlayerReadyState:
   - {fileID: 1744250865}

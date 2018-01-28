@@ -8,6 +8,8 @@ public class SceneManager : MonoBehaviour
 {
     public int NextScene;
 
+	public bool OnlyOneReady = false;
+
     public ControllersManager ControllersManagerInstance;
 
     public Text[] TextPlayerReadyState;
@@ -36,7 +38,13 @@ public class SceneManager : MonoBehaviour
                         {
                             canStart = state;
                         }
-                    }
+
+						if (OnlyOneReady)
+						{
+							StartCoroutine(SwitchScene());
+						}
+
+					}
                     else
                     {
                         canStart = false;
@@ -46,7 +54,9 @@ public class SceneManager : MonoBehaviour
                 {
                     canStart = false;
                 }
-                TextPlayerReadyState[i].text = sState;
+
+				if(TextPlayerReadyState != null && TextPlayerReadyState.Length > 0)
+					TextPlayerReadyState[i].text = sState;
             }
             else
             {
