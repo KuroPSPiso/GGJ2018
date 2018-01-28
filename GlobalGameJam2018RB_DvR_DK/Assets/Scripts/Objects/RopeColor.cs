@@ -6,6 +6,7 @@ public class RopeColor : MonoBehaviour
     public Material matEnabled;
     public Material matDisabled;
     public Material matCharged;
+    public bool inTransfer = false;
 
     public void Disable()
     {
@@ -14,11 +15,24 @@ public class RopeColor : MonoBehaviour
 
     public void ResetColor()
     {
-        GetComponent<LineRenderer>().material = matEnabled;
+        if (!inTransfer)
+            GetComponent<LineRenderer>().material = matEnabled;
     }
 
     public void Highlight()
     {
         GetComponent<LineRenderer>().material = matCharged;
+    }
+
+    public void Transfer()
+    {
+        Highlight();
+        inTransfer = true;
+    }
+
+    public void ResetTransfer()
+    {
+        inTransfer = false;
+        ResetColor();
     }
 }
