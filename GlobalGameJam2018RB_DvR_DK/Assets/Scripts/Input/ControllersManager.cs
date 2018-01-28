@@ -15,7 +15,7 @@ public class ControllersManager : MonoBehaviour
     private Dictionary<int, bool> _playerReadyState = new Dictionary<int, bool>();
 
     public ControllerMappingType MappingType = ControllerMappingType.Plugin;
-    private Dictionary<int, bool> _genericButtonDictionary = new Dictionary<int, bool>(9);
+    private Dictionary<int, bool> _genericButtonDictionary = new Dictionary<int, bool>(10);
 
     public int PlayerCount
     {
@@ -76,7 +76,7 @@ public class ControllersManager : MonoBehaviour
                         if (this._playerReadyState.TryGetValue(i, out value))
                         {
                             this._playerReadyState[i] = !value;
-                            Debug.Log(string.Format("Player /w Controller {0} is ready? {1}.", i, this._playerReadyState[i]));
+                            //Debug.Log(string.Format("Player /w Controller {0} is ready? {1}.", i, this._playerReadyState[i]));
                         }
                     }
                 }
@@ -96,7 +96,7 @@ public class ControllersManager : MonoBehaviour
         }
 
         //Reset Generic Button
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 10; i++)
         {
             this._genericButtonDictionary.Add(i, false);
         }
@@ -454,7 +454,7 @@ public class ControllersManager : MonoBehaviour
         if (MappingType == ControllerMappingType.Both && controllerId == 3)
         {
             bool newState = Input.GetButton(string.Format("Joy{0}Button9", GetIndexOfGenericController() + 1));
-            bool oldState = this._genericButtonDictionary[2];
+            bool oldState = this._genericButtonDictionary[9];
 
             if (!mustRelease)
             {

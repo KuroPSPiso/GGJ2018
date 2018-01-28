@@ -1,18 +1,17 @@
 fileFormatVersion: 2
 guid: c40e717e9745fab4ea81f97e2ede2109
-timeCreated: 1517091372
-licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: lambert25
-    2100002: lambert27
-    2100004: lambert21
+    2100000: InsideTank
+    2100002: Black
+    2100004: Dark_Blue
+    2100006: Light_Blue
     2300000: //RootNode
     3300000: //RootNode
-    4300000: pCylinder31
+    4300000: polySurface9
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -44,7 +43,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 30
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1

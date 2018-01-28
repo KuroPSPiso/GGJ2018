@@ -3,98 +3,118 @@ using UnityEngine;
 
 public class TerminalInteract : MonoBehaviour
 {
-    //Parameters
-    public float maxDistance = 2.0f;
-    public float loadTime = 3.0f;
-    public Transform beginCentre;
-    public GameObject packet;
+	//Parameters
+	public float maxDistance = 2.0f;
+	public float loadTime = 3.0f;
+	public Transform beginCentre;
+	public GameObject packet;
 
-    //Private members
-    float loadStatus = 0.0f;
-    bool isLoading = false;
-    Terminal lastTerminal;
+	//Private members
+	float loadStatus = 0.0f;
+	bool isLoading = false;
+	bool amIInteracting = false;
+	Terminal lastTerminal;
 
-    PlayerInput pInput;
+	PlayerInput pInput;
 
-    void Start()
-    {
-        pInput = GetComponent<PlayerInput>();
-    }
+	void Start()
+	{
+		pInput = GetComponent<PlayerInput>();
+	}
 
-    void Update()
-    {
-        if (!pInput.IsActive())
-            return;
+	void Update()
+	{
+		if (!pInput.IsActive())
+			return;
 
-        if (!isLoading && pInput.IsActing())
-            isLoading = true;
+		if (!isLoading && pInput.IsActing())
+			isLoading = true;
 
-        if (isLoading)
-        {
-            if (!pInput.IsActing())
-            {
-                isLoading = false;
-                loadStatus = 0.0f;
+		if (isLoading)
+		{
+			if (!pInput.IsActing())
+			{
+				isLoading = false;
+				loadStatus = 0.0f;
 
-                if (lastTerminal)
-                {
-                    lastTerminal.StopLoading(pInput.team);
-                    lastTerminal = null;
-                }
-            }
-            else
-            {
-                GameObject terminal = GetClosestTerminal(maxDistance);
+				if (lastTerminal && (lastTerminal.CanUpdateTerminal(pInput.team) || amIInteracting))
+				{
+					lastTerminal.StopLoading(pInput.team);
+					lastTerminal = null;
+					amIInteracting = false;
+				}
+			}
+			else
+			{
+				GameObject terminal = GetClosestTerminal(maxDistance);
 
-                if (terminal)
-                {
-                    Terminal t = terminal.GetComponent<Terminal>();
+				if (terminal)
+				{
+					Terminal t = terminal.GetComponent<Terminal>();
 
-                    if (lastTerminal != t)
-                    {
-                        if(lastTerminal)
-                            lastTerminal.StopLoading(pInput.team);
+					if (lastTerminal != t)
+					{
+						if (lastTerminal)
+						{
+							lastTerminal.StopLoading(pInput.team);
+							amIInteracting = false;
+						}
 
-                        lastTerminal = t;
-                        lastTerminal.StartLoading(pInput.team);
-                    }
+						lastTerminal = t;
 
-                    loadStatus += Time.deltaTime;
+						if (lastTerminal.CanUpdateTerminal(pInput.team))
+						{
+							lastTerminal.StartLoading(pInput.team);
+							amIInteracting = true;
+						}
+					}
 
-                    if (loadStatus >= loadTime)
-                    {
-                        isLoading = false;
-                        loadStatus = 0.0f;
+					if (amIInteracting)
+					{
+						loadStatus += Time.deltaTime;
+					}
 
-                        lastTerminal.FinishLoading(pInput.team);
-                        lastTerminal = null;
+					if (lastTerminal.CanUpdateTerminal(pInput.team) || amIInteracting)
+						lastTerminal.UpdateProgress(pInput.team, loadStatus / loadTime);
 
-                        //Spawn packet
-                        Package package = Instantiate(packet, beginCentre.position, Quaternion.identity).GetComponent<Package>();
-                        package.hookedTo = beginCentre.GetComponentInChildren<Hook>().transform;
-                    }
-                }
-                else if (lastTerminal)
-                {
-                    lastTerminal.StopLoading(pInput.team);
-                    lastTerminal = null;
-                }
-            }
-        }
-    }
+					if (loadStatus >= loadTime)
+					{
+						isLoading = false;
+						loadStatus = 0.0f;
 
-    GameObject GetClosestTerminal(float maxDistance)
-    {
-        KeyValuePair<GameObject, float> closest = new KeyValuePair<GameObject, float>(null, maxDistance);
+						if (lastTerminal.CanUpdateTerminal(pInput.team) || amIInteracting)
+						{
+							lastTerminal.FinishLoading(pInput.team);
+							lastTerminal = null;
+						}
 
-        foreach (GameObject terminalObj in GameObject.FindGameObjectsWithTag("Terminal"))
-        {
-            float distance = Vector3.Distance(transform.position, terminalObj.transform.position);
+						//Spawn packet
+						Package package = Instantiate(packet, beginCentre.position, Quaternion.identity).GetComponent<Package>();
+						package.hookedTo = beginCentre.GetComponentInChildren<Hook>().transform;
+					}
+				}
+				else if (lastTerminal && (lastTerminal.CanUpdateTerminal(pInput.team) || amIInteracting))
+				{
+					lastTerminal.StopLoading(pInput.team);
+					lastTerminal = null;
+					amIInteracting = false;
+				}
+			}
+		}
+	}
 
-            if (distance < closest.Value)
-                closest = new KeyValuePair<GameObject, float>(terminalObj, distance);
-        }
+	GameObject GetClosestTerminal(float maxDistance)
+	{
+		KeyValuePair<GameObject, float> closest = new KeyValuePair<GameObject, float>(null, maxDistance);
 
-        return closest.Key;
-    }
+		foreach (GameObject terminalObj in GameObject.FindGameObjectsWithTag("Terminal"))
+		{
+			float distance = Vector3.Distance(transform.position, terminalObj.transform.position);
+
+			if (distance < closest.Value)
+				closest = new KeyValuePair<GameObject, float>(terminalObj, distance);
+		}
+
+		return closest.Key;
+	}
 }
