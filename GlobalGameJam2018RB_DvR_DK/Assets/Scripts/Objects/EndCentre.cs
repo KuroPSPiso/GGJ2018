@@ -7,6 +7,8 @@ public class EndCentre : Hook
     public Transform tankFill;
     float score = 0.0f;
 
+	public float maxScore = 3;
+
     void Update()
     {
         if (tankFill.localScale.z < score * 13)
@@ -25,5 +27,6 @@ public class EndCentre : Hook
 
     public void IncreaseData()
     {
+		score += 1.0f / maxScore; 
     }
 }

@@ -42,7 +42,7 @@ public class HookSpawner : MonoBehaviour
             {
                 if (nHooks > 0)
                 {
-                    Hook hookScr = Instantiate(hook, gunObj.transform.position, Quaternion.identity).GetComponent<Hook>();
+                    Hook hookScr = Instantiate(hook, gunObj.transform.position, Quaternion.identity).GetComponentInChildren<Hook>();
                     hookScr.isStatic = false;
                     nHooks--;
                 }
@@ -62,6 +62,10 @@ public class HookSpawner : MonoBehaviour
         foreach (GameObject hookObj in GameObject.FindGameObjectsWithTag("Hook"))
         {
             Hook hook = hookObj.GetComponent<Hook>();
+			if(hook == null)
+			{
+				continue;
+			}
 
             if (!hook.isStatic)
             {
