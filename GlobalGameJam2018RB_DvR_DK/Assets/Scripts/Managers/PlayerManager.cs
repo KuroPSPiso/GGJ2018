@@ -43,7 +43,8 @@ public class PlayerManager : MonoBehaviour
             if (pInput.team == team)
             {
                 winCamera.cameraPos.Add(pInput.transform.position - Vector3.forward * 5.0f);
-                player.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Win");
+				pInput.Animator.enabled = true;
+				pInput.Animator.SetTrigger("Win");
             }
         }
 

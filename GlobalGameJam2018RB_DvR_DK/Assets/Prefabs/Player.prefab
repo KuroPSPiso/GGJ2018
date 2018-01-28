@@ -820,7 +820,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1487508699099544}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 77fd64f15db0b4149bb4cf53de733bc6, type: 2}
   m_CullingMode: 0
@@ -891,6 +891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllersManager: {fileID: 0}
   controllerId: 0
+  Animator: {fileID: 95097183742294520}
   ropeManager: {fileID: 0}
   team: 0
   disableInput: 0

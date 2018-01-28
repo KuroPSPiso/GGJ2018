@@ -4,6 +4,7 @@ public class PlayerInput : MonoBehaviour
 {
     public ControllersManager controllersManager;
     public int controllerId;
+	public Animator Animator;
 
     public RopeManager ropeManager;
     public int team;
