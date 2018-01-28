@@ -19,7 +19,7 @@ public class EndCentre : Hook
             scale.z = Mathf.Min(13, scale.z + Time.deltaTime * 2.0f);
             tankFill.localScale = scale;
 
-            if (scale.z >= score * 13)
+            if (score >= 1.0f)
             {
                 playerManager.GotoWin(packageType);
                 winning = true;

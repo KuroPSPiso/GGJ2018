@@ -858,7 +858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2324de9e1980e694b98d0b990aad03bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 10
+  maxDistance: 5
   maxAngle: 30
   maxRopes: 2
   gunObj: {fileID: 4910395123235008}
