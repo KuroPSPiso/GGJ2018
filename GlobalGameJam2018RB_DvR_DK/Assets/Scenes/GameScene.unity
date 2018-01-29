@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
   packageType: 1
   tankFill: {fileID: 1126097255}
   playerManager: {fileID: 270099748}
-  maxScore: 2
+  maxScore: 3
 --- !u!1 &90256753
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,8 +646,8 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: fd255b2fadb30524a9d3db0786a8a585, type: 2}
-  - {fileID: 2100000, guid: fd255b2fadb30524a9d3db0786a8a585, type: 2}
+  - {fileID: 2100000, guid: dfd133defbad2ce4d8b0e51d6f41f29a, type: 2}
+  - {fileID: 2100000, guid: dfd133defbad2ce4d8b0e51d6f41f29a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4954,8 +4954,8 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: fd255b2fadb30524a9d3db0786a8a585, type: 2}
-  - {fileID: 2100000, guid: fd255b2fadb30524a9d3db0786a8a585, type: 2}
+  - {fileID: 2100000, guid: dfd133defbad2ce4d8b0e51d6f41f29a, type: 2}
+  - {fileID: 2100000, guid: dfd133defbad2ce4d8b0e51d6f41f29a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8475,8 +8475,8 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: aded5aa0b03478a429d649dfcc991ba5, type: 2}
-  - {fileID: 2100000, guid: aded5aa0b03478a429d649dfcc991ba5, type: 2}
+  - {fileID: 2100000, guid: e3c3ed9a968e51f44ae681eef73abcc0, type: 2}
+  - {fileID: 2100000, guid: e3c3ed9a968e51f44ae681eef73abcc0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8574,7 +8574,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 728796928
+  randomSeed: 1704598381
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -12002,8 +12002,8 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: aded5aa0b03478a429d649dfcc991ba5, type: 2}
-  - {fileID: 2100000, guid: aded5aa0b03478a429d649dfcc991ba5, type: 2}
+  - {fileID: 2100000, guid: e3c3ed9a968e51f44ae681eef73abcc0, type: 2}
+  - {fileID: 2100000, guid: e3c3ed9a968e51f44ae681eef73abcc0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12101,7 +12101,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 203913267
+  randomSeed: -1369486310
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -16512,6 +16512,46 @@ Prefab:
       propertyPath: packageUI.Array.data[3]
       value: 
       objectReference: {fileID: 1381202433}
+    - target: {fileID: 199927373244126634, guid: c703e77e3d3c3d145b8b275b36be6e0e,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dfd133defbad2ce4d8b0e51d6f41f29a, type: 2}
+    - target: {fileID: 199927373244126634, guid: c703e77e3d3c3d145b8b275b36be6e0e,
+        type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: dfd133defbad2ce4d8b0e51d6f41f29a, type: 2}
+    - target: {fileID: 199431338056691552, guid: c703e77e3d3c3d145b8b275b36be6e0e,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dfd133defbad2ce4d8b0e51d6f41f29a, type: 2}
+    - target: {fileID: 199431338056691552, guid: c703e77e3d3c3d145b8b275b36be6e0e,
+        type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: dfd133defbad2ce4d8b0e51d6f41f29a, type: 2}
+    - target: {fileID: 199010384017928034, guid: c703e77e3d3c3d145b8b275b36be6e0e,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e3c3ed9a968e51f44ae681eef73abcc0, type: 2}
+    - target: {fileID: 199010384017928034, guid: c703e77e3d3c3d145b8b275b36be6e0e,
+        type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: e3c3ed9a968e51f44ae681eef73abcc0, type: 2}
+    - target: {fileID: 199077131779860822, guid: c703e77e3d3c3d145b8b275b36be6e0e,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e3c3ed9a968e51f44ae681eef73abcc0, type: 2}
+    - target: {fileID: 199077131779860822, guid: c703e77e3d3c3d145b8b275b36be6e0e,
+        type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: e3c3ed9a968e51f44ae681eef73abcc0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c703e77e3d3c3d145b8b275b36be6e0e, type: 2}
   m_IsPrefabParent: 0
@@ -18172,7 +18212,7 @@ MonoBehaviour:
   packageType: 0
   tankFill: {fileID: 1620648518}
   playerManager: {fileID: 270099748}
-  maxScore: 2
+  maxScore: 3
 --- !u!1 &1992151742
 GameObject:
   m_ObjectHideFlags: 0
